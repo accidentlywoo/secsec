@@ -1,0 +1,7 @@
+.metadata/
+front/.classpath
+front/.project
+front/.settings/.jsdtscope
+front/.settings/
+Servers/
+front/WebContent/META-INF/MANIFEST.MF
