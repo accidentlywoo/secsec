@@ -4,11 +4,16 @@
 		<title>졸려시부엉</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=3.0">
+		<style>
+			img{
+				width: 50%;
+			}
+		</style>
 	</head>
 	<body>
 		<h1>여니</h1>
 		<p>우물 속에는 달이 밝고 구름이 흐르고 하늘이 펼치고 파아란 바람이 불고 가을이 있고 추억처럼 사나이가 있습니다.</p>
-		<div>
+		<div id="div1">
 			<h3>텍스트 관련 태그들</h3>
 			<p>
 				단락 1.
@@ -22,7 +27,7 @@
 				대웅인피온은 인도네시아 보건복지부와 함께 DWP710을 임상중이다.<br>
 			</p>
 		</div>
-		<div>
+		<div id="div2">
 			<h3>목록을 만드는 태그</h3>
 			<ul>
 				<li>자바</li>
@@ -55,6 +60,23 @@
 				<tr><td>노잼노잼</td><td>노잼</td></tr>
 				<tr><td colspan="2">셀병합</td></tr>
 			</table>
+		</div>
+		<div id="div3">
+			<h3>이미지</h3>
+			<img src="./images/movie_image.jpg" alt="살아있다.">
+			<figure>
+				<img src="./images/movie_image.jpg" alt="살아있다.">
+				<figcaption>살아있다.</figcaption>
+			</figure>
+		</div>
+		<div id="div4">
+			<h3>링크 만들기</h3>
+			<a href="http://www.naver.com">네이버</a>
+			<a href="http://www.daum.net" target="_blank">다음</a>
+			<br>
+			<a href="#div1">텍스트</a>
+			<a href="#div2">목록</a>
+			<iframe src="./sub.html" width="500px"></iframe>
 		</div>
 	</body>
 </html>
