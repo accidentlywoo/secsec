@@ -8,9 +8,16 @@
 <body>
     <h1>HTML5 입력 양식</h1>
     <input type="text" name="t1" value="test" form="form5">
-    <form action="http://www.daum.net" autocomplete="off" id="form5"><!-- 자동완성기능 : autocomplete -->
+    <form action="http://www.daum.net" 
+    			method="get"
+  			    autocomplete="off" id="form5"><!-- 자동완성기능 : autocomplete -->
         <label>텍스트 : </label>
-        <input name="t"> <!-- type="text"--><br>
+        <input name="t" 
+        autofocus
+        placeholder="입력하세요"
+		required>  <!-- 유호성 검사 -->
+		<input type="text" value="readonly" readonly>
+       	<br>
         <label>숫자 : </label>
         <input type="number" value="1" max="10" min="0"><br>
         <label>이메일 : </label>
@@ -61,6 +68,18 @@
         <input type="submit" value="전송">
         <input type="reset" value="CLEAR">
         <input type="button" value="일반버튼">
+    </form>
+    <hr>
+    <h2>파일 업로드</h2>
+    <form method="post" enctype="multipart/form-data" action=""><!-- 파일업로드는 post방식, enctype="multipart/form-data" 사용  -->
+    	<input type="file" name="file1">
+    	<input type="submit" value="파일업로드" >
+    </form>
+    <hr>
+    <h2>hidden 데이터 전송</h2>
+    <form action="http://www.daum.net">
+    	<input type="hidden" name="id" value="hiddenValue">
+		<input type="submit" value="히든데이터 전송" >
     </form>
 </body>
 </html>
