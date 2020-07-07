@@ -6,6 +6,38 @@
     <title>Document</title>
 </head>
 <body>
+    <h1>HTML5 입력 양식</h1>
+    <input type="text" name="t1" value="test" form="form5">
+    <form action="http://www.daum.net" autocomplete="off" id="form5"><!-- 자동완성기능 : autocomplete -->
+        <label>텍스트 : </label>
+        <input name="t"> <!-- type="text"--><br>
+        <label>숫자 : </label>
+        <input type="number" value="1" max="10" min="0"><br>
+        <label>이메일 : </label>
+        <input type="email" value="a@b.com"><br>
+        <label>핸드폰번호 : </label>
+        <input type="tel" value="01012345678"><br>
+        <label>날짜 : </label>
+        <input type="date" value="메롱"><br>
+        <label>검색 : </label>
+        <input type="search" value="test"><br>
+
+		<fieldset>
+            <legend>다중 선택</legend>
+	        <label><input type="checkbox" checked="checked" name="r" value="1"> ONE</label>
+	        <label><input type="checkbox" name="e" value="2"> TWO</label>
+        </fieldset>
+        
+        <fieldset>
+            <legend>단일 선택</legend>
+            <label><input type="radio" checked="checked" name="e" value="1"> ONE</label>
+            <label><input type="radio" name="e" value="2"> TWO</label>
+        </fieldset><!-- label로 감싼 text까지 클릭이 가능하다 -->
+        <button type="submit">전송</button>
+    </form>
+    <br>
+    <br>
+    <br>
     <h1>입력 양식</h1>
     <form action="http://www.daum.net">
         <input name="t">
