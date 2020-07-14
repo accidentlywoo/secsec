@@ -4,79 +4,197 @@
 		<title>졸려시부엉</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=3.0">
-		<style>
-			img{
-				width: 50%;
-			}
-		</style>
+		<link rel="stylesheet" href="static/css/reset.css">
+    <link rel="stylesheet" href="static/css/main.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="static/css/bootstrap-4.5.0-dist/css/bootstrap.min.css">
+    <script>
+        addEventListener('load',()=>{
+            var loginMenu = document.querySelector("a.login");
+            var section = document.querySelector("section.loginPopUp");
+            loginMenu.addEventListener('click', e => {
+                section.style.display = "inline";
+                var xhttp = new XMLHttpRequest();
+                xhttp.addEventListener('readystatechange' ,e => {
+                    if(e.target.readyState == 4 && e.target.status == 200){
+                        // --------- Oh My God -----------
+                        var section = document.querySelector("section.loginPopUp");
+                        section.innerHTML = e.target.responseText;
+                        var btSubmitObj = document.querySelector("form button[type=submit]");
+                        btSubmitObj.addEventListener('click', e => {
+                            var idValue = document.querySelector("input[name=id]").value;
+                            var pwdValue = document.querySelector("input[name=pwd").value;
+                            var xhttp = new XMLHttpRequest();
+                            xhttp.addEventListener('readystatechange' ,e => {
+                                if(e.target.readyState == 4 && e.target.status == 200){
+                                    // 응답 내용을 자바스크립트 객체로 변환
+                                    var responseObj = JSON.parse(e.target.responseText);
+                                    alert(responseObj.status);
+
+                                    if(responseObj.status.trim() == 'success'){
+                                        alert(e.target.responseText);
+                                    }else{
+                                        document.querySelector("input[name=id]").focus();
+                                        document.querySelector("input[name=id]").select();
+                                    }
+                                }
+                            });
+                            xhttp.open("POST", "login.jsp", true); // Request 
+                            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                            
+                            var sendData = 'id=';
+                            sendData += idValue;
+                            sendData += '&';
+                            sendData += 'pwd=';
+                            sendData += pwdValue;
+                            xhttp.send(sendData);
+                            alert(sendData +'login clicked');
+                            e.preventDefault();
+                        });
+                        document.querySelector("form").addEventListener('submit', e => {
+                            e.preventDefalut();
+                            e.stopPropagation();
+                        });
+                        //--------------------------------
+                    }
+                });
+                xhttp.open("GET", "./login.html"); // Request 
+                xhttp.send();
+                e.preventDefault();
+            });
+
+            var productMenu = document.querySelector("li.product_list > a");
+            productMenu.addEventListener('click', e =>{
+                console.log("click");
+                var xhttp = new XMLHttpRequest();
+                xhttp.addEventListener('readystatechange',e =>{
+                    if(e.target.readyState == 4 && e.target.status == 200){
+                        //응답 내용을 자바스크립트 객체로 변환 : 배열형태로 응답
+                        var responseObjArr = JSON.parse(e.target.responseText);
+                        var productObj = document.querySelector("li.product_list");
+                        var ulElement = document.createElement('ul');
+                        productObj.appendChild(ulElement);
+                        responseObjArr.forEach((element, index)=>{
+                            var productListObj = document.querySelector("li.product_list ul")
+                            
+                            var liElement = document.createElement('li');
+                            var textNode = document.createTextNode(element.prod_no+" ,  ");
+                            liElement.appendChild(textNode);
+                            productListObj.appendChild(liElement);
+
+                            textNode = document.createTextNode(element.prod_name+" ,  ");
+                            liElement.appendChild(textNode);
+                            productListObj.appendChild(liElement);
+
+                            textNode = document.createTextNode(element.prod_price);
+                            liElement.appendChild(textNode);
+                            productListObj.appendChild(liElement);
+                        });
+                    }
+                });
+                xhttp.open("GET", "productList.jsp", true);
+                xhttp.send();
+                e.preventDefault();
+            });
+        });
+    </script>
 	</head>
 	<body>
 		<h1>여니</h1>
-		<p>우물 속에는 달이 밝고 구름이 흐르고 하늘이 펼치고 파아란 바람이 불고 가을이 있고 추억처럼 사나이가 있습니다.</p>
-		<div id="div1">
-			<h3>텍스트 관련 태그들</h3>
-			<p>
-				단락 1.
-			</p>
-			<p>
-				단락 2.
-				대웅제약은 <mark>중간엽줄기세포</mark>를 이용해 자체 개발한 신종 코로나바이러스 감염증(코로나19) 호흡기 증상 치료제 후보물질(DWP710)에 대해 인도네시아 정부로부터 임상 1상 시험 계획을 승인받았다고 6일 밝혔다.<br>
-				
-				대웅제약은 합자 법인 대웅인피온과 함께 인도네시아에서 임상시험에 나선다.<br>
-				
-				대웅인피온은 인도네시아 보건복지부와 함께 DWP710을 임상중이다.<br>
-			</p>
-		</div>
-		<div id="div2">
-			<h3>목록을 만드는 태그</h3>
-			<ul>
-				<li>자바</li>
-				<li>오라클</li>
-				<li>HTML</li>
-			</ul>
-			<ol>
-				<li>자바</li>
-				<li>오라클</li>
-				<li>HTML</li>
-			</ol>
-			<dl>
-				<dt>제목</dt>
-				<dd>내용</dd>
-			</dl>
-			<h3>표를 만드는 태그</h3>
-			<table style="width: 50%;border: 1px solid;">
-				<!-- 
-				<thead><tr><td>A</td><td>B</td></tr></thead>
-				<tbody><tr><td>C</td><td>D</td></tr></tbody>
-				<tbody><tr><td>E</td><td>F</td></tr></tbody> 
-				요즘은 tr, td로만 사용한다.
-				-->
-				<!-- <tr><td>A</td><td>B</td></tr> 
-				자동으로 thead, tbody 태그가 붙여진다
-				<tr><td>A</td><td>B</td></tr>
-				<tr><td>A</td><td>B</td></tr> -->
-				<tr><th>A</th><th>B</th></tr>
-				<tr><td>가나다</td><td>라마바</td></tr>
-				<tr><td>노잼노잼</td><td>노잼</td></tr>
-				<tr><td colspan="2">셀병합</td></tr>
-			</table>
-		</div>
-		<div id="div3">
-			<h3>이미지</h3>
-			<img src="./images/movie_image.jpg" alt="살아있다.">
-			<figure>
-				<img src="./images/movie_image.jpg" alt="살아있다.">
-				<figcaption>살아있다.</figcaption>
-			</figure>
-		</div>
-		<div id="div4">
-			<h3>링크 만들기</h3>
-			<a href="http://www.naver.com">네이버</a>
-			<a href="http://www.daum.net" target="_blank">다음</a>
-			<br>
-			<a href="#div1">텍스트</a>
-			<a href="#div2">목록</a>
-			<iframe src="./sub.html" width="500px"></iframe>
-		</div>
+		<nav class="nav nav-pills">
+                <ul>
+                    <li>
+                        <a href="#" class="login alert-dismissible">로그인</a>
+                        <!-- 로그인 Pop Up 으로 띄우기????? -->
+                    </li>
+                     <li class="product_list">
+                        <a href="#">상품 목록 보기</a>
+                    </li>
+                    <li>
+                        <a>학번 찾기</a>
+                    </li>
+                    <li>
+                        <a>비밀번호 찾기</a>
+                    </li>
+                </ul>
+                <ul style="display: none;">
+                    <li>UserName</li>
+                    <li>내정보 보기</li> 
+                    <li>로그아웃</li>
+                </ul>
+        </nav>
+        <section class="loginPopUp" style="display:none"></section>
+        <section>
+            <div>
+
+            </div>
+            <p>우물 속에는 달이 밝고 구름이 흐르고 하늘이 펼치고 파아란 바람이 불고 가을이 있고 추억처럼 사나이가 있습니다.</p>
+            <div id="div1">
+                <h3>텍스트 관련 태그들</h3>
+                <p>
+                    단락 1.
+                </p>
+                <p>
+                    단락 2.
+                    대웅제약은 <mark>중간엽줄기세포</mark>를 이용해 자체 개발한 신종 코로나바이러스 감염증(코로나19) 호흡기 증상 치료제 후보물질(DWP710)에 대해 인도네시아 정부로부터 임상 1상 시험 계획을 승인받았다고 6일 밝혔다.<br>
+                    
+                    대웅제약은 합자 법인 대웅인피온과 함께 인도네시아에서 임상시험에 나선다.<br>
+                    
+                    대웅인피온은 인도네시아 보건복지부와 함께 DWP710을 임상중이다.<br>
+                </p>
+            </div>
+            <div id="div2">
+                <h3>목록을 만드는 태그</h3>
+                <ul>
+                    <li>자바</li>
+                    <li>오라클</li>
+                    <li>HTML</li>
+                </ul>
+                <ol>
+                    <li>자바</li>
+                    <li>오라클</li>
+                    <li>HTML</li>
+                </ol>
+                <dl>
+                    <dt>제목</dt>
+                    <dd>내용</dd>
+                </dl>
+                <h3>표를 만드는 태그</h3>
+                <table style="width: 50%;border: 1px solid;">
+                    <!-- 
+                    <thead><tr><td>A</td><td>B</td></tr></thead>
+                    <tbody><tr><td>C</td><td>D</td></tr></tbody>
+                    <tbody><tr><td>E</td><td>F</td></tr></tbody> 
+                    요즘은 tr, td로만 사용한다.
+                    -->
+                    <!-- <tr><td>A</td><td>B</td></tr> 
+                    자동으로 thead, tbody 태그가 붙여진다
+                    <tr><td>A</td><td>B</td></tr>
+                    <tr><td>A</td><td>B</td></tr> -->
+                    <tr><th>A</th><th>B</th></tr>
+                    <tr><td>가나다</td><td>라마바</td></tr>
+                    <tr><td>노잼노잼</td><td>노잼</td></tr>
+                    <tr><td colspan="2">셀병합</td></tr>
+                </table>
+            </div>
+            <div id="div3">
+                <h3>이미지</h3>
+                <img src="./images/movie_image.jpg" alt="살아있다.">
+                <figure>
+                    <img src="./images/movie_image.jpg" alt="살아있다.">
+                    <figcaption>살아있다.</figcaption>
+                </figure>
+            </div>
+            <div id="div4">
+                <h3>링크 만들기</h3>
+                <a href="http://www.naver.com">네이버</a>
+                <a href="http://www.daum.net" target="_blank">다음</a>
+                <br>
+                <a href="#div1">텍스트</a>
+                <a href="#div2">목록</a>
+                <iframe src="./sub.html" width="500px"></iframe>
+            </div>
+        </section>
+		
 	</body>
 </html>
