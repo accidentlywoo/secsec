@@ -5,40 +5,19 @@
         }
     </style>
     <script>
-        // addEventListener('load', () => {
-        //     var btSubmitObj = document.querySelector("form button[type=submit]");
-        //     var section = document.querySelector("section");
-        //     btSubmitObj.addEventListener('click', e => {
-        //         var idValue = document.querySelector("input[name=id]").value;
-        //         var pwdValue = document.querySelector("input[name=pwd").value;
-        //         var xhttp = new XMLHttpRequest();
-        //         xhttp.addEventListener('readystatechange' ,e => {
-        //             if(this.readyState == 4 && this.status == 200){
-        //                 //section.innerHTML = this.responseText;
-        //                 alert(e.target.responseText);
-        //             }
-        //         });
-        //         xhttp.open("POST", "login.jsp", true); // Request 
-        //         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                
-        //       	var sendData = 'id=';
-        //         sendData += idValue;
-        //         sendData += '&';
-        //         sendData += 'pwd=';
-        //         sendData += pwdValue;
-        //         xhttp.send(sendData);
-        //         alert(sendData +'login clicked');
-        //         e.preventDefault();
-        //     });
-        //     document.querySelector("form").addEventListener('submit', e => {
-        //     	e.preventDefalut();
-        //     	e.stopPropagation();
-        //     });
-        // });
+        // 문서의 렌더링이 되면
+        // localstorage에 lojinId 이름에 해당하는 item 얻기, ID입력란에 보여주기
+
+        // 아이디 저장 checkbox가 
+        // selected될경우 browser localstorage에 데이터 저장 이름은 "loginId", 값은 입력한 ID 값 추가
+        // selected해지될 경우 browser localstorage에 데이터 저장 이름은 "loginId" 삭제
+        addEventListener('load',() => {
+
+        });
     </script>
     <form>
-        <label><span>아이디</span><input type="text" name="id" value="id1" size="10"></label><br>
-        <label><span>비밀번호</span><input type="password" name="pwd" value="p1" size="10"></label><br>
+        <label><span>아이디</span><input type="text" name="id" size="10"></label><br>
+        <label><span>비밀번호</span><input type="password" name="pwd" size="10"></label><br>
         <label><input type="checkbox">아이디 저장</label>
         <button type="submit">로그인</button>
     </form>

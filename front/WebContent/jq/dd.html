@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <style>
+        html,body{
+            height: 100%;
+        }
+        #items, #cart{
+            width: 80%;
+            height: 30%;
+            outline: 1px solid blueviolet;
+        }
+        img{
+            width: 30%;
+            height: 100%;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(() => {
+            var imgObjArr = $('div#items > img'); // 자바스크립트 객체
+            var $imgObj1 = $(imgObjArr[0]); // jQuery 객체
+            $($imgObj1).on('dragstart', e => {
+                console.log(e);
+                console.log(e.target.attributes.src.value);
+                console.log("냥! "+e.target.attributes.src);
+                e.originalEvent.dataTransfer.setData("src", e.target.attributes.src.value);
+            });
+            // imgObjArr.forEach(()=>{
+            //     el.on('dragstart', e => {
+            //         console.log(e);
+            //         console.log(e.target.attributes.src.value);
+            //         console.log("냥! "+e.target.attributes.src);
+            //         e.originalEvent.dataTransfer.setData("src", e.target.attributes.src.value);
+            //     });
+            // });
+            var $cartObj = $('div#cart');
+            $cartObj.on('dragover', e => {
+                console.log("drag over");
+                return false;
+            });
+            $cartObj.on('drop', e => {
+                console.log("drop");
+                var src = e.originalEvent.dataTransfer.getData("src");
+
+                // jQuery로 객체 만들기
+                var $obj = $("<img>");
+                $obj.attr("src", src);
+
+                // 객체를 DOM트리(#cart)에 추가
+                $(e.target).append($obj);
+                return false;
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="items">
+        <img src="../images/movie_image.jpg" draggable="true">
+        <img src="../images/jpa.jpg" draggable="true">
+        <img src="../images/기릿깃.png" draggable="true">
+    </div>
+    <div id="cart">
+        장바구니
+    </div>
+</body>
+</html>
