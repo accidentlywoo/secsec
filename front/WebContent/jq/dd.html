@@ -22,22 +22,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         $(() => {
-            var imgObjArr = $('div#items > img'); // 자바스크립트 객체
-            var $imgObj1 = $(imgObjArr[0]); // jQuery 객체
-            $($imgObj1).on('dragstart', e => {
-                console.log(e);
-                console.log(e.target.attributes.src.value);
-                console.log("냥! "+e.target.attributes.src);
+            // var imgObjArr = $('div#items > img'); // 자바스크립트 객체
+            // var $imgObj1 = $(imgObjArr[0]); // jQuery 객체
+            var $imgObjArr = $("div#items > img");
+            $imgObjArr.on('dragstart', e => {
+                e.originalEvent.dataTransfer.setData("id", e.target.attributes.id.value);
                 e.originalEvent.dataTransfer.setData("src", e.target.attributes.src.value);
             });
-            // imgObjArr.forEach(()=>{
-            //     el.on('dragstart', e => {
-            //         console.log(e);
-            //         console.log(e.target.attributes.src.value);
-            //         console.log("냥! "+e.target.attributes.src);
-            //         e.originalEvent.dataTransfer.setData("src", e.target.attributes.src.value);
-            //     });
-            // });
             var $cartObj = $('div#cart');
             $cartObj.on('dragover', e => {
                 console.log("drag over");
@@ -46,13 +37,25 @@
             $cartObj.on('drop', e => {
                 console.log("drop");
                 var src = e.originalEvent.dataTransfer.getData("src");
+                var id = e.originalEvent.dataTransfer.getData("id");
+                console.log(id);
+                var $obj = $("#"+id); // #id 값 하나 찾기 getElementById()
+                // var $obj = $("img#"+id); 증식 복사 img태그에서 #id 값 찾기
+                // jQuery의 querySelector에서 추가동작을 하는데,.. 시부엉이다.
+                // 이유를 찾아라!
+                // -> jQuery Selector Traversing
+                // https://api.jquery.com/id-selector/
+                console.log($obj);
 
+                //jQuery로 객체 복사하기
+                var $cloneObj = $obj.clone();
+                $cartObj.append($cloneObj);
                 // jQuery로 객체 만들기
-                var $obj = $("<img>");
-                $obj.attr("src", src);
+                // var $obj = $("<img>");
+                // $obj.attr("src", src);
 
                 // 객체를 DOM트리(#cart)에 추가
-                $(e.target).append($obj);
+                // $(e.target).append($obj);
                 return false;
             });
         });
@@ -60,9 +63,9 @@
 </head>
 <body>
     <div id="items">
-        <img src="../images/movie_image.jpg" draggable="true">
-        <img src="../images/jpa.jpg" draggable="true">
-        <img src="../images/기릿깃.png" draggable="true">
+        <img id="id1" src="../images/movie_image.jpg" draggable="true">
+        <img id="id2" src="../images/jpa.jpg" draggable="true">
+        <img id="id3" src="../images/기릿깃.png" draggable="true">
     </div>
     <div id="cart">
         장바구니
