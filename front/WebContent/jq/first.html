@@ -18,7 +18,7 @@
                 //----------상품목록 메뉴 START----------
                 //dom트리에서 nav>ul>li>a요소의 class속성이 productList인 객체 찾기
                 var $productListMenu = $('nav>ul>li>a.productList');
-                
+                $productListMenu.trigger('click');
                 $productListMenu.click(function(){
                     $.ajax({
                         url: '../productList.jsp'
@@ -46,6 +46,8 @@
                     $section.html("");
                     return false;
                 });
+                
+                $productListMenu.trigger('click'); // $productListMenu의 click 이벤트 강제 발생 
                 //----------상품목록 메뉴 END-----------
                 
                 //----------로그인버튼 CLICK START ------
@@ -83,7 +85,9 @@
                                 ,success:function(data){
                                     var responseObj = JSON.parse(data); //{"status": "success"}또는 {"status":"fail"}
                                     if(responseObj.status == "success"){
-                                        alert('로그인 성공');	
+                                        alert('로그인 성공');
+                                        var redirectURL = 'signup.html';
+                                        location.href = redirectURL;
                                     }else{
                                         $('form>label>input[name=id]').focus();
                                         $('form>label>input[name=id]').select();
@@ -104,17 +108,17 @@
                 //dom트리에서 nav>ul>li>a요소의 class속성이 login인 객체 찾기
                 var $loginMenu = $('nav>ul>li>a.login');
                 $loginMenu.click(function(){
-                $.ajax({
-                    url: '../login.html'
-                    , success: function(data){
-                        $section.html(data);
-                        var idValue = $('form>label>input[name=id]').val() = localStorage.getItem("loginId");
-                        var pwdValue = $('form>label>input[name=pwd]').val() = localStorage.getItem("loginPwd");
-                    }//end success function(data)
-                });	
-                //$section.html("");
-                $section.empty();
-                return false;
+                    $.ajax({
+                        url: '../login.html'
+                        , success: function(data){
+                            $section.html(data);
+                            var idValue = $('form>label>input[name=id]').val() = localStorage.getItem("loginId");
+                            var pwdValue = $('form>label>input[name=pwd]').val() = localStorage.getItem("loginPwd");
+                        }//end success function(data)
+                    });	
+                    //$section.html("");
+                    $section.empty();
+                    return false;
                 });
                 //----------로그인 메뉴 END-----------
                 
