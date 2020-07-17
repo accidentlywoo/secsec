@@ -85,6 +85,17 @@
                 }
             });
         });
+        
+        // ------- 가입버튼 전송 END --------
+        // ------- input enter START --------
+        //input 입력양식에서 enter누르면 기본 이벤트 핸들러가 자동 처리되고
+        // 그 기본 이벤트 핸들러에 의해 form의 submit 이벤트가 자동 발생된다.
+        // enter누를경우 기본 이벤트 핸들러를 막는다. 
+        $("div.signup > form input").keypress(e => {
+            if(e.keyCode === 13){
+                return false;
+            }
+        });
     });
 </script>
 </head>

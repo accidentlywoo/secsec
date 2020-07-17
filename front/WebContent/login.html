@@ -3,19 +3,17 @@
         form>label>span::after{
             content: ' : ';
         }
+        form#loginComponent{
+            width: 500px;
+            height: 500px;
+            background-color: whitesmoke;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            margin-left: -250px;
+        }
     </style>
-    <script>
-        // 문서의 렌더링이 되면
-        // localstorage에 lojinId 이름에 해당하는 item 얻기, ID입력란에 보여주기
-
-        // 아이디 저장 checkbox가 
-        // selected될경우 browser localstorage에 데이터 저장 이름은 "loginId", 값은 입력한 ID 값 추가
-        // selected해지될 경우 browser localstorage에 데이터 저장 이름은 "loginId" 삭제
-        addEventListener('load',() => {
-
-        });
-    </script>
-    <form>
+    <form id="loginComponent">
         <label><span>아이디</span><input type="text" name="id" size="10"></label><br>
         <label><span>비밀번호</span><input type="password" name="pwd" size="10"></label><br>
         <label><input type="checkbox">아이디 저장</label>

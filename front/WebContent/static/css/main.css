@@ -37,9 +37,7 @@ header gnb ul li a{
 }
 section{
     width: 100%;
-    height: 400px;
     position: relative;
-    background-color: greenyellow;
     outline: 1px solid darkmagenta;
 }
 section.loginPopUp{
@@ -49,6 +47,24 @@ section.loginPopUp{
     z-index: 999;
     background-color: cornsilk;
 }
+
+section .products .product{
+    display: inline-block;
+}
+section .products .product li{
+    width: 150px;
+    padding-left: 10px;
+}
+section .productDetail{
+    padding: 10px;
+    outline: 2px solid darkcyan;
+}
+section .productDetail input{
+    line-height: 24px;
+    padding-left: 10px;
+    margin: 0 10px;
+}
+
 article{
     outline: 1px solid blueviolet;
 }
