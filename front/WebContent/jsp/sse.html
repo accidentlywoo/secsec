@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		addEventListener('load', () => {
+			let es = new EventSource('demo_event.jsp');
+			// console.log(es);
+			// es.addEventListener('open', () => {
+			// 	console.log("open");
+			// });
+			// es.addEventListener('message', e => {
+			// 	console.log("message");
+			// 	console.log(e);
+			// 	console.log(e.data);
+			// });
+			$(es).on('message', e => {
+				console.log("jQuery",e);
+				let sseData = e.originalEvent.data;
+				$("body").html($("body").html()+sseData+"<br>");
+			});
+			$(es).on('first', e => {
+				let sseData = e.originalEvent.data;
+				console.log("first",sseData);
+			});
+		});
+	</script>
+</head>
+<body>
+
+</body>
+</html>
