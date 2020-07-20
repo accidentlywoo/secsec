@@ -34,20 +34,35 @@
             $('.triangle').click(() => {
                 let startX = 200; let startY = 0;
 
+                ctx.beginPath();
                 ctx.strokeStyle = 'red';
                 ctx.moveTo(startX, startY); // 200 0
                 let endX = startX + 100; let endY = startY+100; //300 100
                 ctx.lineTo(endX, endY); // 300 100
                 ctx.stroke();
+                ctx.closePath();//생략가능
 
+                
+                ctx.beginPath();
                 ctx.strokeStyle = 'green';
                 ctx.moveTo(startX-100, startY+100); // 100 100
                 ctx.lineTo(startX+100, startY+100); //300 100
                 ctx.stroke();
+                // ctx.closePath();//생략가능
 
+                ctx.beginPath();
                 ctx.strokeStyle = 'blue'; //마지막 스타일만 적용됨 -> 영역 지정방법?
                 ctx.moveTo(startX-100, startY+100);
                 ctx.lineTo(startX, startY);
+                ctx.stroke();
+            });
+        
+            $('.circle').click(() => {
+                ctx.beginPath();
+                ctx.arc(95, 50, 40, 0, 2 * Math.PI);
+                ctx.fillStyle = 'green';
+                ctx.fill();
+                
                 ctx.stroke();
             });
         });
@@ -56,8 +71,12 @@
 <body>
     <button class="line">선긋기</button>
     <button class="text">글씨쓰기</button>
-    <button class="clear">지우기</button>
     <button class="triangle">삼각형 그리기</button>
+
+    <button class="circle">원 그리기</button>
+
+    <button class="clear">지우기</button>
+    
     <hr>
     <canvas id="myCanvas" width="600px" height="500px" style="border: 1px solid darkslategrey;"></canvas>
 </body>
