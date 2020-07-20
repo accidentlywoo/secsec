@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+       addEventListener('load',()=>{
+            let canvasObj = document.getElementById("myCanvas");
+            let ctx = canvasObj.getContext("2d");
+            $('.line').click(() => {
+                let startX = 0;
+                let startY = 0;
+                ctx.moveTo(startX, startY);
+
+                let endX = startX+100;
+                let endY = startY+200;
+                ctx.lineTo(endX, endY);
+                ctx.stroke();
+            });
+            
+            $('.text').click(() => {
+                let startX = 100; let starY = 100;
+                ctx.font = "2em Arial";
+                ctx.strokeStyle = 'red';
+                ctx.fillText("Hello World", startX, starY);
+            });
+            $('.clear').click(() => {
+                let startX = 0; let startY = 0;
+                let w = '600', h = '500';
+                ctx.clearRect(startX, startY, w, h);
+            });
+            $('.triangle').click(() => {
+                let startX = 200; let startY = 0;
+
+                ctx.strokeStyle = 'red';
+                ctx.moveTo(startX, startY); // 200 0
+                let endX = startX + 100; let endY = startY+100; //300 100
+                ctx.lineTo(endX, endY); // 300 100
+                ctx.stroke();
+
+                ctx.strokeStyle = 'green';
+                ctx.moveTo(startX-100, startY+100); // 100 100
+                ctx.lineTo(startX+100, startY+100); //300 100
+                ctx.stroke();
+
+                ctx.strokeStyle = 'blue'; //마지막 스타일만 적용됨 -> 영역 지정방법?
+                ctx.moveTo(startX-100, startY+100);
+                ctx.lineTo(startX, startY);
+                ctx.stroke();
+            });
+        });
+    </script>
+</head>
+<body>
+    <button class="line">선긋기</button>
+    <button class="text">글씨쓰기</button>
+    <button class="clear">지우기</button>
+    <button class="triangle">삼각형 그리기</button>
+    <hr>
+    <canvas id="myCanvas" width="600px" height="500px" style="border: 1px solid darkslategrey;"></canvas>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
+    <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
+    <script>
+        var Grid = tui.Grid;
+        const options = {
+            el: document.getElementById('grid'),
+            columns: [
+                {
+                    title: 'Name',
+                    name: 'name'
+                },
+                {
+                    title: 'Artist',
+                    name: 'artist'
+                },
+                {
+                    title: 'Release',
+                    name: 'release'
+                },
+                {
+                    title: 'Genre',
+                    name: 'genre'
+                }
+            ],
+            data: [
+                {
+                    name: 'Beautiful Lies',
+                    artist: 'Birdy',
+                    release: '2016.03.26',
+                    genre: 'Pop'
+                }
+            ]
+        };
+
+        const grid = new Grid(options);
+    </script>
+</head>
+
+<body>
+    <div id="grid"></div>
+</body>
+
+</html>

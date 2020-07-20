@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		addEventListener('load', () => {
 			let es = new EventSource('demo_event.jsp');
@@ -20,6 +20,10 @@
 				console.log("jQuery",e);
 				let sseData = e.originalEvent.data;
 				$("body").html($("body").html()+sseData+"<br>");
+				let responseObj = JSON.parse(sseData);
+				let msg = '<h1>'+responseObj.msg+'</h1>';
+				let time = responseObj.time;
+				$("body").html(msg + time);
 			});
 			$(es).on('first', e => {
 				let sseData = e.originalEvent.data;
