@@ -10,7 +10,7 @@ import com.my.exception.RemoveException;
 import com.my.vo.Customer;
 
 public interface CustomerDAO {
-	Customer insert(Customer customer) throws AddException, DuplicatedException, FindException;
+	void insert(Customer customer) throws AddException, DuplicatedException, FindException;
 	List<Customer> selectAll() throws FindException;
 	Customer selectById(String id) throws FindException;
 	List<Customer> selectByName(String word) throws FindException;

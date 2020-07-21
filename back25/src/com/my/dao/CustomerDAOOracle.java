@@ -19,7 +19,7 @@ import com.my.vo.Postal;
 public class CustomerDAOOracle implements CustomerDAO{
 
 	@Override
-	public Customer insert(Customer customer) throws AddException, DuplicatedException, FindException {
+	public void insert(Customer customer) throws AddException, DuplicatedException, FindException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -50,7 +50,6 @@ public class CustomerDAOOracle implements CustomerDAO{
 		}finally {
 			MyConnection.close(pstmt, con);
 		}
-		return null;
 	}
 
 	@Override
