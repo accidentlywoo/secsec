@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(function(){
+            let $pickOne = $("div > ul > li");
+            let data;
+            $pickOne.click(() => {
+                data = {};
+                data.zipcode = $(this).find(".zipcode").html();
+                data.address =  $(this).find(".address").html();
+                data.buildingNo = $(this).find(".buildingNo").html();
+                $("fieldset > input.zipcode", opener.document).val(data.zipcode);
+                $("fieldset > input.address", opener.document).val(data.address);
+                $("fieldset > input.buildingNo", opener.document).val(data.buildingNo);
+                close();
+            });
+        });
+    </script>
+    <style>
+        .buildingNo{
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <input type="text" placeholder="주소를 입력하세요.">
+        <ul>
+            <li>
+                <ul>
+                    <li class="zipcode">30087</li>
+                    <li class="address">세종특별자치시 금남면 두만리 432</li>
+                    <li class="buildingNo">건물번호 123</li>
+                </ul>
+            </li>
+            <li>
+                <ul>
+                    <li class="zipcode">30087</li>
+                    <li class="address">세종특별자치시 금남면 두만리 429-2</li>
+                    <li class="buildingNo">건물번호 456</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
