@@ -34,4 +34,14 @@
     <servlet-name>ResponseServlet</servlet-name>
     <url-pattern>/response</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ModelServletTest</display-name>
+    <servlet-name>ModelServletTest</servlet-name>
+    <servlet-class>com.my.control.ModelServletTest</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ModelServletTest</servlet-name>
+    <url-pattern>/modelTest</url-pattern>
+  </servlet-mapping>
 </web-app>
