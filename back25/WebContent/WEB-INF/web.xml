@@ -14,4 +14,24 @@
     <servlet-name>FirstServlet</servlet-name>
     <url-pattern>/first</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RequestServlet</display-name>
+    <servlet-name>RequestServlet</servlet-name>
+    <servlet-class>com.my.control.RequestServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RequestServlet</servlet-name>
+    <url-pattern>/request</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ResponseServlet</display-name>
+    <servlet-name>ResponseServlet</servlet-name>
+    <servlet-class>com.my.control.ResponseServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ResponseServlet</servlet-name>
+    <url-pattern>/response</url-pattern>
+  </servlet-mapping>
 </web-app>

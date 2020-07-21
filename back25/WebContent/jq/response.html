@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $.ajax({
+            // url: '../reponse'
+            url: '/back25/response'// URI값 -> /~
+            // url: 'http://localhost/back25/response'
+            ,success: data => {
+                // data가 String문자열로 판단해서 JSON.parse(data) 작업을 했다.
+                alert(data.status); // server의 응답형식이 json객체이면 바로 뚝딱 써도 된다.
+            }
+        });
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
