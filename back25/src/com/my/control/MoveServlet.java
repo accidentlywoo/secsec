@@ -37,8 +37,8 @@ public class MoveServlet extends HttpServlet {
 			show(request, response);
 		}else if(opt.equals("forward")) {
 			String servletPath = "/first"; // "/back25/first" -> url : /back25/back25/first 로 생성
-			// "first" -> 상대 경로로 결정된다. 현재
-			// "/first" -> 절대경로는 ServletPath 경로 기준으로 잡는다.
+			// "first" -> 상대 경로로 결정된다. 현재 ServletPath 
+			// "/first" -> 절대경로는ContextPath 기준으로 잡는다.
 			/*
 			 * WEB-INF의 보안상 직접접근을 못하기 때문에 web.xml의 url-pattern에 맞는 접근을 해야한다.
 			 * WEB-INF 아래에 생성되는 lib, classes, web.xml의 접근은 web.xml을 통해서 가능!
