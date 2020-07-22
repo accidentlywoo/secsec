@@ -36,7 +36,7 @@
             //          가입 버튼 객체를 화면에 뿌려주기
 
             $.ajax({
-                url:'../idDupChk.jsp'
+                url:'/back25/idDupChk'
                 ,method:'POST'
                 ,data : {id : $idObj.val()}
                 ,success : data => {
@@ -46,7 +46,7 @@
                         $idObj.focus();
                     }else{
                         alert("사용 가능한 ID입니다.");
-                        $idObj.attr();
+                        $idObj.attr("readonly");
                         console.log($(this));
                         $("form button[type=submit]").css("display","inline");
                     }

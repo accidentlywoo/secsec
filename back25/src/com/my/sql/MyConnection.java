@@ -9,7 +9,7 @@ import java.sql.Statement;
 
 public class MyConnection {
 	private final static String className = "oracle.jdbc.driver.OracleDriver";
-	private final static String url = "jdbc:oracle:thin:@192.168.0.107:1521:xe";;
+	private final static String url = "jdbc:oracle:thin:@192.168.0.114:1521:xe";;
 	private final static String user ="test";
 	private final static String password = "test";
 	

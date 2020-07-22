@@ -129,7 +129,7 @@
             $loginMenu.click(() => {
                 let oldSection = $section.html();
                 $.ajax({
-                    url: '../login.html'
+                    url: '/back25/login.html'
                     , success: data => {
                         oldSection += data;
                         $section.html(oldSection);
@@ -146,7 +146,7 @@
             //회원 가입
             let $signupMenu = $('nav>ul>li>a.signup');
             $signupMenu.click(() => {
-                location.href = 'signup.html';
+                location.href = '/back25/jq/signup.html';
             });
 
             // -- 상품별 click start --
@@ -161,7 +161,7 @@
                     return false;
                 }
                 $.ajax({
-                    url: '../productDetail.jsp'
+                    url: '/back25/productDetail'
                     , data: { 'prod_no': prodId }
                     , success: data => {
                         let responseObj = JSON.parse(data);

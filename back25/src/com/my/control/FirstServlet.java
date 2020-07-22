@@ -13,15 +13,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class FirstServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public FirstServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
 	/*
 	 * 다양한 요청 정보가 올 수 있다. 
 	 *  경우 1 : http://localhost/back25/first?a=hello&b=1&c=one&c=twi&c=three

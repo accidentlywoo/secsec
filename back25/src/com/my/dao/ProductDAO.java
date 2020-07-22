@@ -15,7 +15,46 @@ import com.my.vo.Product;
 
 public class ProductDAO {
 	public void insert(Product product) throws AddException, DuplicatedException{}
-	public Product selectByNo(String no) throws FindException{return null;}
+	public Product selectByNo(String no) throws FindException{
+		Connection connection = null;
+		PreparedStatement pstmt = null;
+		ResultSet result = null;
+		
+		try {
+			connection = MyConnection.getConnection();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		
+		String selectBtProdNo = 
+				"SELECT \r\n" + 
+				"    prod_no,\r\n" + 
+				"    prod_name,\r\n" + 
+				"    prod_price\r\n" + 
+				"FROM product\r\n" + 
+				"WHERE prod_no = ?";
+		
+		try {
+			pstmt = connection.prepareStatement(selectBtProdNo);
+			pstmt.setString(1, no);
+			result = pstmt.executeQuery();
+			if(result.next()) {
+				Product product = new Product();
+				product.setProd_no(result.getString("prod_no"));
+				product.setProd_name(result.getString("prod_name"));
+				product.setProd_price(result.getInt("prod_price"));
+				return product;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if(connection != null) {
+				MyConnection.close(result, pstmt, connection);
+			}
+		}
+		
+		return null;
+	}
 	public List<Product> selectByName(String word) throws FindException{return null;}
 	public List<Product> selectAll(int page) throws FindException{return null;}
 	
