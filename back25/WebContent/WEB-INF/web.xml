@@ -44,4 +44,54 @@
     <servlet-name>ModelServletTest</servlet-name>
     <url-pattern>/modelTest</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LoginServlet</display-name>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>com.my.control.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SignupServlet</display-name>
+    <servlet-name>SignupServlet</servlet-name>
+    <servlet-class>com.my.control.SignupServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SignupServlet</servlet-name>
+    <url-pattern>/signup</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>IdDupChServlet</display-name>
+    <servlet-name>IdDupChServlet</servlet-name>
+    <servlet-class>com.my.control.IdDupChServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>IdDupChServlet</servlet-name>
+    <url-pattern>/idDupChk</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MoveServlet</display-name>
+    <servlet-name>MoveServlet</servlet-name>
+    <servlet-class>com.my.control.MoveServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MoveServlet</servlet-name>
+    <url-pattern>/move</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PathTest</display-name>
+    <servlet-name>PathTest</servlet-name>
+    <servlet-class>com.my.control.pathTest.PathTest</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PathTest</servlet-name>
+    <url-pattern>/test/pathTest</url-pattern>
+  </servlet-mapping>
 </web-app>
