@@ -1,6 +1,7 @@
+<%@page import="java.io.FileNotFoundException"%>
 <%@page import="java.io.FileInputStream"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ page buffer="8kb" %>
+<%@ page buffer="none" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +23,14 @@
  --%>
 <%
 	FileInputStream fis;
-	fis = new FileInputStream("c:/a.txt");
+	try{
+		fis = new FileInputStream("c:/a.txt");	
+	}catch(FileNotFoundException e){
+		String servletPath = "/back25/error.jsp";
+		RequestDispatcher dispatcher = request.getRequestDispatcher(servletPath);
+		dispatcher.forward(request, response); // forward에서 기존 버퍼내용을 clear하고 응답을 한다.
+	}
+	
 %>
 </body>
 </html>
