@@ -117,9 +117,13 @@
     <display-name>ParamServlet</display-name>
     <servlet-name>ParamServlet</servlet-name>
     <servlet-class>com.my.control.ParamServlet</servlet-class>
+    <init-param>
+    	<param-name></param-name>
+    	<param-value></param-value>
+    </init-param>
   </servlet>
   <servlet-mapping>
     <servlet-name>ParamServlet</servlet-name>
-    <url-pattern>/ParamServlet</url-pattern>
+    <url-pattern>/param</url-pattern>
   </servlet-mapping>
 </web-app>
