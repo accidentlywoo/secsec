@@ -12,16 +12,20 @@ import javax.servlet.http.HttpServletResponse;
 
 public class ParamServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private String pm;
+	private String version;
+	private String charset;
 	
+	public ParamServlet() {
+		ServletContext context = this.getServletContext();
+		pm = context.getInitParameter("pm");
+		version = context.getInitParameter("version");
+		
+		charset = this.getInitParameter("charset");
+	}
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		ServletContext context = this.getServletContext();
-		String pm = context.getInitParameter("pm"); // ServletContext parameter떙기기
-		String version = context.getInitParameter("version");
-		
-		String charset = this.getInitParameter("charset"); // Servlet Class Parameter 땡겨오기
-		
 		String id = req.getParameter("id");
 		
 		res.setContentType("text/html;charset="+charset);
