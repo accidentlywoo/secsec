@@ -4,6 +4,14 @@
   <welcome-file-list>
     <welcome-file>first.html</welcome-file>
   </welcome-file-list>
+  <context-param>
+    <param-name>pm</param-name>
+    <param-value>WooYeonHui</param-value>
+  </context-param>
+  <context-param>
+    <param-name>version</param-name>
+    <param-value>1.0</param-value>
+  </context-param>
   <servlet>
     <description></description>
     <display-name>FirstServlet</display-name>
@@ -103,5 +111,15 @@
   <servlet-mapping>
     <servlet-name>ProductDetailServlet</servlet-name>
     <url-pattern>/productDetail</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ParamServlet</display-name>
+    <servlet-name>ParamServlet</servlet-name>
+    <servlet-class>com.my.control.ParamServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ParamServlet</servlet-name>
+    <url-pattern>/ParamServlet</url-pattern>
   </servlet-mapping>
 </web-app>
