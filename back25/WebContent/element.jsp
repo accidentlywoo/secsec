@@ -63,17 +63,32 @@
                 <li>Directive Element
                 	<ul>
                 		<li>
-                			page 지시자 = jsp용 java 파일이 만들어질때 필요한 정보를 기술
+                			page 지시자 - jsp용 java 파일이 만들어질때 필요한 정보를 기술
                 		</li>
                 		<li>
-                		
+                			include 지시자 - jsp용 java파일이 만들어질때 포함
                 		</li>
                 		<li>
-                			
+                			taglib 지시자
                 		</li>
                 	</ul>
                 </li>
-                <li>Action Tag Element</li>
+                <li>Action Tag Element
+                	<ul>
+                		<li>
+                			standard tag element
+                			<ol>
+                				<li>
+                					jsp:includ tag - 실행결과를 포함
+                				</li>
+                			</ol>
+                			include tag element
+               			</li>
+                		<li>
+                			custom tag element
+                		</li>
+                	</ul>
+                </li>
             </ol>
         </li>
     </ul>
