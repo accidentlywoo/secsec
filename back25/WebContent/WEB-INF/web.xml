@@ -118,8 +118,9 @@
     <servlet-name>ParamServlet</servlet-name>
     <servlet-class>com.my.control.ParamServlet</servlet-class>
     <init-param>
-    	<param-name></param-name>
-    	<param-value></param-value>
+    	<param-name>charset</param-name>
+    	<param-value>UTF-8</param-value>
+    	<!-- <param-value>SHIFT-JIT</param-value> -->
     </init-param>
   </servlet>
   <servlet-mapping>
