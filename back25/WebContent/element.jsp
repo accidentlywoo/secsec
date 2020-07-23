@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>  -> language는 기본 java, 다른건 지원안함, content type에서 인코딩지정하면 pageEncoding 생량 --%>
+<%@ page contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
 <html>
 
@@ -59,7 +60,19 @@
                        	 </li>
                     </ul>
                 </li>
-                <li>Directive Element</li>
+                <li>Directive Element
+                	<ul>
+                		<li>
+                			page 지시자 = jsp용 java 파일이 만들어질때 필요한 정보를 기술
+                		</li>
+                		<li>
+                		
+                		</li>
+                		<li>
+                			
+                		</li>
+                	</ul>
+                </li>
                 <li>Action Tag Element</li>
             </ol>
         </li>
