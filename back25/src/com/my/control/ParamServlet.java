@@ -16,13 +16,26 @@ public class ParamServlet extends HttpServlet {
 	private String version;
 	private String charset;
 	
-	public ParamServlet() {
+//	public ParamServlet() {
+//		ServletContext context = this.getServletContext();
+//		pm = context.getInitParameter("pm");
+//		version = context.getInitParameter("version");
+//		
+//		charset = this.getInitParameter("charset");
+		// NPE
+//	}
+	
+
+	@Override
+	public void init() throws ServletException {
+		super.init();
 		ServletContext context = this.getServletContext();
 		pm = context.getInitParameter("pm");
 		version = context.getInitParameter("version");
 		
 		charset = this.getInitParameter("charset");
 	}
+
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {

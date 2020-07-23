@@ -16,10 +16,27 @@ import com.my.vo.Customer;
 
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private CustomerService service;
+	private String realPath;
+	
+	
+	@Override
+	public void init() throws ServletException {
+		super.init();
 		ServletContext sc = this.getServletContext();
-		String realPath = sc.getRealPath("customers.properties");
-		CustomerService service = new CustomerService(realPath);
+		String customerEnvFileName = sc.getInitParameter("custonerEnv");
+//		realPath = sc.getRealPath("customers.properties");
+		realPath = sc.getRealPath(customerEnvFileName);
+	}
+
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		/*
+		 * ServletContext sc = this.getServletContext(); String realPath =
+		 * sc.getRealPath("customers.properties"); CustomerService service = new
+		 */
+		service = new CustomerService(realPath);
+		 
 		
 		String id = request.getParameter("id");
 		String pwd = request.getParameter("pwd");
