@@ -17,7 +17,8 @@
 	this.totalScore += score;
 	this.count++;
 %> 
-<cite>선택한 별점은 <%=score %> 점 입니다.</cite>
+<cite>선택한 별점은 <%--=score --%>${param.score} 점 입니다.</cite> 
+<%--int score = Integer.parseInt(request.getParameter("score")); 안써도된다 --%>
 <hr>
 <span>평균 별점 : <%=(double)this.totalScore / this.count %></span>
 <br>
