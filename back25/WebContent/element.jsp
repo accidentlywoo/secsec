@@ -79,7 +79,19 @@
                 			standard tag element
                 			<ol>
                 				<li>
-                					jsp:includ tag - 실행결과를 포함
+                					<p>
+                						jsp:includ tag - 실행결과를 포함 : RequestDispatcher의 include()와 같음
+                					</p>
+                				</li>
+                				<li>
+                					<p>
+                						<small>사용안함</small>
+                						jsp:forward tag - 서버사이드에서 이동 : RequestDispatcher의 forward()와 같음
+                					</p>
+                				</li>
+                				<li>
+                					<small>사용안함</small>
+                					jsp:useBean tag, jsp:setProperty, jsp:getProperty
                 				</li>
                 			</ol>
                 			include tag element
