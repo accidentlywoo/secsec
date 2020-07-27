@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,7 +47,7 @@ public class LoginServlet extends HttpServlet {
 //		PrintWriter out = response.getWriter();
 		try {
 			Customer customer = service.findById(id);
-			String servletPath = "/success.jsp";
+			String servletPath;
 			if(customer == null) {
 				servletPath = "/fail.jsp";
 //				out.print("{\"status\":\"fail\"}");
@@ -55,6 +56,10 @@ public class LoginServlet extends HttpServlet {
 				servletPath = "/fail.jsp";
 //				out.print("{\"status\":\"fail\"}");
 //				return;
+			}else {
+				servletPath = "/success.jsp";
+				Cookie cookie = new Cookie("id", id);
+				response.addCookie(cookie);
 			}				
 			service.login(id, pwd);
 

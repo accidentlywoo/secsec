@@ -1,8 +1,9 @@
+<%@page contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
 <html>
 <!-- HTML 주석 -->
 <head>
-    <title>졸려시부엉</title>
+    <title>웰컴파일</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=3.0">
     <link rel="stylesheet" href="/back25/static/css/reset.css">
@@ -92,16 +93,7 @@
                                 alert('로그인 성공');
                                 // var redirectURL = 'signup.html';
                                 // location.href = redirectURL;
-                                let logInData = {};
-                                logInData.id = idValue;
-                                logInData.pwd = pwdValue;
-
-                                let logInObj = $("nav>ul.signIn");
-                                let nonLogInObj = $("nav>ul.nonSignIn");
-                                nonLogInObj.css("display", "none");
-                                logInObj.css("display", "inline").find("a.login").html(logInData.id);
-
-                                $section.find("form#loginComponent").remove();
+                                location.reload();
                             } else {
                                 alert("로그인 실패");
                                 $('form>label>input[name=id]').focus();
@@ -230,35 +222,9 @@
             <a class="home">여니</a>
         </h1>
         <nav>
-            <ul class="nav nav-pills mb-3 nonSignIn">
-                <li style="display:none" class="nav-item">
-                    <a href="#" class="nav-link active login"></a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link active login">로그인</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link signup">회원가입</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link productList">상품목록</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link cartList">장바구니</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link">학번 찾기</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link">비밀번호 찾기</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link signup">내정보 보기</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link productList">로그아웃</a>
-                </li>
-            </ul>
+            <%-- <jsp:include page="/back25/fragment/menu.jsp"></jsp:include>
+        --%>
+        	<%@include file="./fragment/menu.jsp" %>
         </nav>
         <section>
             <div class="loginPopUp" style="display:none">
