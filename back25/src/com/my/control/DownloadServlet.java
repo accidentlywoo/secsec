@@ -3,6 +3,7 @@ package com.my.control;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -28,7 +29,8 @@ public class DownloadServlet extends HttpServlet {
 		//응답형식 지정 : img파일을 위한 모든 경우를 위한 기본값.
 		res.setContentType("application/octet-stream; charset=UTF-8");
 		// 응답헤더 설정 : Download할 파일이름 결정
-		res.setHeader("Content-Disposition", "attachment; filename=\""+name+"\"");
+		res.setHeader("Content-Disposition", "attachment; filename=\""+URLEncoder.encode(name, "UTF-8")+"\"");
+												//new String(name.getBytes("UTF-8"), "ISO-8859-1")
 		
 		ServletOutputStream sos = res.getOutputStream();
 		com.my.model.Download download = new com.my.model.Download(realPath, sos);
