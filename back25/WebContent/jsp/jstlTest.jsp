@@ -1,3 +1,6 @@
+<%@page import="com.my.vo.Product"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -87,5 +90,15 @@
 		%>
 		시간 출력 : <fmt:formatDate value="${requestScope.dt}" pattern="yyyy-MM-dd a h:mm:ss"/>
 	</p>
+	<%
+	List<Product> list = new ArrayList<>();
+	list.add(new Product("C0001", "아메리카노", 1000));
+	list.add(new Product("C0002", "아이스", 1000));
+	list.add(new Product("C0003", "라테", 1000));
+	request.setAttribute("list", list);
+	%>
+	<c:forEach items="${requestScope.list}" var="p" varStatus="status">
+		${status.index } : ${p.prod_no } - ${p.prod_name } - ${p.prod_price } <br>	
+	</c:forEach>
 </body>
 </html>
