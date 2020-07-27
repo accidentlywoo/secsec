@@ -30,24 +30,9 @@ public class DownloadServlet extends HttpServlet {
 		// 응답헤더 설정 : Download할 파일이름 결정
 		res.setHeader("Content-Disposition", "attachment; filename=\""+name+"\"");
 		
-		// 파일 읽기
-		FileInputStream fis = null;
-		fis = new FileInputStream(realPath);
-		// 파일 내용 응답하기
-//		PrintWriter out = res.getWriter(); -> 이미지파일을 읽을 수 없다.
 		ServletOutputStream sos = res.getOutputStream();
+		com.my.model.Download download = new com.my.model.Download(realPath, sos);
+		// POJO를 이용한 구현
 		
-		// 한바이트씩 읽기!
-//		int readValue = -1;
-//		while((readValue = fis.read()) != -1) {
-//			sos.write(readValue);
-//		}
-		byte[] bArr = new byte[1024];
-		int readCnt = -1; // 읽은 바이트 수
-		while ((readCnt = fis.read(bArr)) != -1) {
-			sos.write(bArr, 0, readCnt);
-		}
-		fis.close();
-		sos.close();
 	}
 }
