@@ -7,6 +7,7 @@
 <%
 ObjectMapper mapper = new ObjectMapper();
 
-List<Product> list = new ArrayList<>();
-out.print(request.getAttribute("list"));
+List<Product> list =(List) request.getAttribute("list");
+String jsonStr = mapper.writeValueAsString(list);
 %>
+<%=jsonStr %>

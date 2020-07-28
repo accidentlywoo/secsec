@@ -154,11 +154,11 @@
                     , success: data => {
                         let responseObj = JSON.parse(data);
                         prodDetail += '<form class="productDetail">';
-                        prodDetail = prodDetail + '<input type="text" value=' + responseObj['prod_no'] + ' readonly>';
+                        prodDetail = prodDetail + '<input type="text" value=' + responseObj['prod_no'] + ' name="prod_no"  readonly>';
                         prodDetail = prodDetail + '<input type="text" value=' + responseObj['prod_name'] + ' readonly>';
                         prodDetail = prodDetail + '<input type="text" value=' + responseObj['prod_price'] + ' readonly>';
                         prodDetail = prodDetail + '<input type="text" value=' + responseObj['prod_detail'] + ' readonly>';
-                        prodDetail = prodDetail + '<label>수량 <input type="number" min="0"></label>';
+                        prodDetail = prodDetail + '<label>수량 <input type="number" min="0" name="quantity"></label>';
                         prodDetail = prodDetail + '<button type="submit">장바구니 담기</button>';
                         prodDetail = prodDetail + '</form>';
                         $(targetObj).after(prodDetail);
@@ -194,7 +194,7 @@
             });
             // -- 장바구니 담기 --
             $("section").on('click', '.productDetail button[type=submit]', e => {
-                var targetObj = e.currentTarget;
+                var targetObj = e.currentTarget.parentElement;
                 var formDataSerialize = $(targetObj).serialize();
                 $.ajax({
                     url: '/back25/putCart'
@@ -203,7 +203,7 @@
                     , success: data => {
                         if (data.status == 'success') {
                             alert('장바구니 넣기 성공');
-                            $("nav li > a.cartList").trigger('click');
+                            window.location.reload;
                         } else {
                             alert('장바구니 넣기 실패');
                         }
