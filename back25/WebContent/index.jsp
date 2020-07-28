@@ -32,7 +32,7 @@
             $productListMenu.click(() => {
                 let oldSection = $section.html();
                 $.ajax({
-                    url: '../productList.jsp'
+                    url: '/back25/productList'
                     , success: data => {
                         //응답내용을 자바스크립트객체로 변환:배열형태로 응답
                         let responseArrObj = JSON.parse(data);
@@ -197,12 +197,11 @@
                 var targetObj = e.currentTarget;
                 var formDataSerialize = $(targetObj).serialize();
                 $.ajax({
-                    url: '/back25/putCart.jsp'
+                    url: '/back25/putCart'
                     , method: 'POST'
                     , data: formDataSerialize
                     , success: data => {
-                        let responseObj = JSON.parse(data);
-                        if (responseObj.status == 'success') {
+                        if (data.status == 'success') {
                             alert('장바구니 넣기 성공');
                             $("nav li > a.cartList").trigger('click');
                         } else {

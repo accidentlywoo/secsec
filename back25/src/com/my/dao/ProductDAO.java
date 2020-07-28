@@ -72,7 +72,7 @@ public class ProductDAO {
 		}
 		
 		String selectAll = "SELECT \r\n" + 
-				"    prod_namem\r\n" + 
+				"    prod_name\r\n" + 
 				"    ,prod_no\r\n" + 
 				"    ,prod_price\r\n" + 
 				"FROM product\r\n";
@@ -84,8 +84,8 @@ public class ProductDAO {
 				list.add(product);
 			}
 			if(list.size() == 0)
-				throw new FindException("상품이 없습니다.");
-			//return list; //return 직전에 finally 구문 수행
+				throw new FindException("�긽�뭹�씠 �뾾�뒿�땲�떎.");
+			//return list; //return 吏곸쟾�뿉 finally 援щЦ �닔�뻾
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {

@@ -59,7 +59,8 @@ public class Product {
 			return false;
 		return true;
 	}
-
-
-	
+	@Override
+	public String toString() {
+		return "Product [prod_no=" + prod_no + ", prod_name=" + prod_name + ", prod_price=" + prod_price + "]";
+	}
 }

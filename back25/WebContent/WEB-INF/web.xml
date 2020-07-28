@@ -150,4 +150,24 @@
     <servlet-name>UploadServlet</servlet-name>
     <url-pattern>/upload</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ProductListServlet</display-name>
+    <servlet-name>ProductListServlet</servlet-name>
+    <servlet-class>com.my.control.ProductListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductListServlet</servlet-name>
+    <url-pattern>/productList</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PutCartServlet</display-name>
+    <servlet-name>PutCartServlet</servlet-name>
+    <servlet-class>com.my.control.PutCartServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PutCartServlet</servlet-name>
+    <url-pattern>/putCart</url-pattern>
+  </servlet-mapping>
 </web-app>

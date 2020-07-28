@@ -10,6 +10,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.my.exception.FindException;
 import com.my.service.CustomerService;
@@ -58,8 +59,10 @@ public class LoginServlet extends HttpServlet {
 //				return;
 			}else {
 				servletPath = "/success.jsp";
-				Cookie cookie = new Cookie("id", id);
-				response.addCookie(cookie);
+//				Cookie cookie = new Cookie("id", id);
+//				response.addCookie(cookie);
+				HttpSession session = request.getSession();
+				session.setAttribute("loginInfo", id);
 			}				
 			service.login(id, pwd);
 
