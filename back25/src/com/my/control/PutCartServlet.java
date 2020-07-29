@@ -22,7 +22,6 @@ public class PutCartServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		Map<String, Integer> cart = (Map<String, Integer>) session.getAttribute("cart");
 		if(cart == null) {
-			System.out.println("check point : "+req.getParameter("quantity"));
 			cart = new HashMap<String, Integer>();
 			cart.put(req.getParameter("prod_no"), Integer.parseInt(req.getParameter("quantity")));
 			session.setAttribute("cart", cart);
@@ -39,7 +38,7 @@ public class PutCartServlet extends HttpServlet {
 			totalQuantity = Integer.parseInt(req.getParameter("quantity"));
 			cart.put(req.getParameter("prod_no"), totalQuantity);
 			session.setAttribute("cart", cart);
-		}
+		} 
 		String servletPath ="/success.jsp";
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher(servletPath);

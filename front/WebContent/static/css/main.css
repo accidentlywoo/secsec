@@ -55,13 +55,15 @@ section .products .product li{
     width: 150px;
     padding-left: 10px;
 }
+section .products li img{
+    width: 200px;
+}
 section .productDetail{
     padding: 10px;
     outline: 2px solid darkcyan;
 }
 section .productDetail input{
     line-height: 24px;
-    padding-left: 10px;
     margin: 0 10px;
 }
 

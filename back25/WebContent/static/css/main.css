@@ -49,11 +49,21 @@ section.loginPopUp{
 }
 
 section .products .product{
+	width: 33%;
     display: inline-block;
+}
+section .products .product ul{
+	margin-bottom: 0;
 }
 section .products .product li{
     width: 150px;
+    display:inline-block;
     padding-left: 10px;
+    overflow: hidden;
+}
+section .products .product li img{
+    width: 150px;
+    height: 120px;
 }
 section .productDetail{
     padding: 10px;

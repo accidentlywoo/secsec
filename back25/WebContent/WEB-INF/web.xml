@@ -13,7 +13,7 @@
     <param-value>1.0</param-value>
   </context-param>
   <context-param>
-    <param-name>custonerEnv</param-name>
+    <param-name>customerEnv</param-name>
     <param-value>customers.properties</param-value>
   </context-param>
   <servlet>
@@ -169,5 +169,35 @@
   <servlet-mapping>
     <servlet-name>PutCartServlet</servlet-name>
     <url-pattern>/putCart</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ViewCartServlet</display-name>
+    <servlet-name>ViewCartServlet</servlet-name>
+    <servlet-class>com.my.control.ViewCartServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewCartServlet</servlet-name>
+    <url-pattern>/viewCart</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LogoutServlet</display-name>
+    <servlet-name>LogoutServlet</servlet-name>
+    <servlet-class>com.my.control.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogoutServlet</servlet-name>
+    <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddOrderServlet</display-name>
+    <servlet-name>AddOrderServlet</servlet-name>
+    <servlet-class>com.my.control.AddOrderServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddOrderServlet</servlet-name>
+    <url-pattern>/addOrder</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -17,7 +17,6 @@ public class MyConnection {
 		Connection con = null;
 		con = DriverManager.getConnection(url, user, password);
 		Class.forName(className);
-		System.out.println("JDBC 드라이버 로드 성공");
 		return con;
 	}
 	public static void close(Connection connection)  {

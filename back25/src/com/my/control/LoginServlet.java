@@ -26,7 +26,7 @@ public class LoginServlet extends HttpServlet {
 	public void init() throws ServletException {
 		super.init();
 		ServletContext sc = this.getServletContext();
-		String customerEnvFileName = sc.getInitParameter("custonerEnv");
+		String customerEnvFileName = sc.getInitParameter("customerEnv");
 //		realPath = sc.getRealPath("customers.properties");
 		realPath = sc.getRealPath(customerEnvFileName);
 	}

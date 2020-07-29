@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
 <!-- HTML 주석 -->
+
 <head>
     <title>웰컴파일</title>
     <meta charset="UTF-8">
@@ -25,42 +26,27 @@
             });
             //dom트리에서 class속성이 divContent인 div객체의 하위요소 section객체찾기
             let $section = $("div.divContent>section");
-            //----------상품목록 메뉴 START----------
-            //dom트리에서 nav>ul>li>a요소의 class속성이 productList인 객체 찾기
-            let $productListMenu = $('nav>ul>li>a.productList');
-            $productListMenu.trigger('click');
-            $productListMenu.click(() => {
+
+            //----------로그인 메뉴 START-------------
+            //dom트리에서 nav>ul>li>a요소의 class속성이 login인 객체 찾기
+            let $loginMenu = $('nav>ul>li>a.login');
+            $loginMenu.click(() => {
                 let oldSection = $section.html();
                 $.ajax({
-                    url: '/back25/productList'
+                    url: '/back25/login.html'
                     , success: data => {
-                        //응답내용을 자바스크립트객체로 변환:배열형태로 응답
-                        let responseArrObj = JSON.parse(data);
-                        let sectionData = '<div class="products">';
-                        responseArrObj.forEach((element, index) => {
-                            let prod_no = element.prod_no;
-                            let prod_name = element.prod_name;
-                            let prod_price = element.prod_price;
-                            //	             응답내용 처리				
-                            sectionData += '<div class="product">';
-                            sectionData += "<ul>";
-                            sectionData += '<li class="prod_no">'; sectionData += prod_no; sectionData += '</li>';
-                            sectionData += "<li>"; sectionData += prod_name; sectionData += "</li>";
-                            sectionData += "<li>"; sectionData += prod_price; sectionData += "</li>";
-                            sectionData += "</ul>";
-                            sectionData += "</div>";
-                        });
-                        sectionData += "</div>";
-                        sectionData += oldSection;
-                        $section.html(sectionData);
-                    }
+                        oldSection += data;
+                        $section.html(oldSection);
+                        $('form>label>input[name=id]').val(localStorage.getItem("loginId"));
+                        // $('form>label>input[name=pwd]').val(localStorage.getItem("loginPwd"));
+
+                    }//end success function(data)
                 });
+                //$section.html("");
+                $section.empty();
                 return false;
             });
-
-            $productListMenu.trigger('click'); // $productListMenu의 click 이벤트 강제 발생 
-            //----------상품목록 메뉴 END-----------
-
+            //----------로그인 메뉴 END-----------
             //----------로그인버튼 CLICK START ------
             //DOM에 존재하지 않지만 향후 추가될 객체에 대한 이벤트 처리
             //on()
@@ -91,8 +77,6 @@
                             // var responseObj = JSON.parse(data); //{"status": "success"}또는 {"status":"fail"}
                             if (data.status == "success") {
                                 alert('로그인 성공');
-                                // var redirectURL = 'signup.html';
-                                // location.href = redirectURL;
                                 location.reload();
                             } else {
                                 alert("로그인 실패");
@@ -111,32 +95,63 @@
                 });
             //----------로그인버튼 CLICK END ------
 
-            //----------로그인 메뉴 START-------------
-            //dom트리에서 nav>ul>li>a요소의 class속성이 login인 객체 찾기
-            let $loginMenu = $('nav>ul>li>a.login');
-            $loginMenu.click(() => {
-                let oldSection = $section.html();
+            // ----------로그아웃------------
+            let $logoutMenu = $('nav > ul li .logout');
+            $logoutMenu.click(() => {
                 $.ajax({
-                    url: '/back25/login.html'
+                    url: '/back25/logout'
                     , success: data => {
-                        oldSection += data;
-                        $section.html(oldSection);
-                        $('form>label>input[name=id]').val(localStorage.getItem("loginId"));
-                        // $('form>label>input[name=pwd]').val(localStorage.getItem("loginPwd"));
-
-                    }//end success function(data)
+                        if (data.status == 'success') {
+                            alert('로그아웃 되었습니다.');
+                            location.reload();
+                        }
+                    }
                 });
-                //$section.html("");
-                $section.empty();
-                return false;
             });
-            //----------로그인 메뉴 END-----------
+
+            //----------로그아웃 CLICK END ------
             //회원 가입
             let $signupMenu = $('nav>ul>li>a.signup');
             $signupMenu.click(() => {
                 location.href = '/back25/jq/signup.html';
             });
+            //----------상품목록 메뉴 START----------
+            //dom트리에서 nav>ul>li>a요소의 class속성이 productList인 객체 찾기
+            let $productListMenu = $('nav>ul>li>a.productList');
+            $productListMenu.trigger('click');
+            $productListMenu.click(() => {
+                let oldSection = $section.html();
+                $.ajax({
+                    url: '/back25/productList'
+                    , success: data => {
+                        //응답내용을 자바스크립트객체로 변환:배열형태로 응답
+                        let responseArrObj = JSON.parse(data);
+                        let sectionData = '<div class="products">';
+                        responseArrObj.forEach((element, index) => {
+                            let prod_no = element.prod_no;
+                            let prod_name = element.prod_name;
+                            let prod_price = element.prod_price;
+                            //	             응답내용 처리				
+                            sectionData += '<div class="product">';
+                            sectionData += "<ul>";
+                            sectionData += '<li class="prod_no" style="  visibility: hidden;">'; sectionData += prod_no; sectionData += '</li>';
+                            //cartList +=  '<img src="/back25/images/'+element['prod_no']+'.jpg>';
+                            sectionData += '<li><img src="/back25/images/' + prod_no + '.jpg"></li>';
+                            sectionData += "<li>"; sectionData += prod_name; sectionData += "</li>";
+                            sectionData += "<li>"; sectionData += prod_price; sectionData += "</li>";
+                            sectionData += "</ul>";
+                            sectionData += "</div>";
+                        });
+                        sectionData += "</div>";
+                        sectionData += oldSection;
+                        $section.html(sectionData);
+                    }
+                });
+                return false;
+            });
 
+            $productListMenu.trigger('click'); // $productListMenu의 click 이벤트 강제 발생 
+            //----------상품목록 메뉴 END-----------
             // -- 상품별 click start --
             $("section").on('click', ".products > .product", e => {
                 let prodId = e.currentTarget.querySelector(".prod_no").innerHTML;
@@ -144,7 +159,8 @@
                 var targetObj = e.currentTarget;
                 console.log("targetObj.nextSibling", targetObj.nextSibling);
                 console.log("targetObj : ", targetObj.hasChildNodes());
-                if (targetObj.nextSibling.className == 'productDetail') {
+                if (targetObj.nextSibling !== null &&
+                    targetObj.nextSibling.className == 'productDetail') {
                     $(targetObj.nextSibling).remove();
                     return false;
                 }
@@ -158,7 +174,7 @@
                         prodDetail = prodDetail + '<input type="text" value=' + responseObj['prod_name'] + ' readonly>';
                         prodDetail = prodDetail + '<input type="text" value=' + responseObj['prod_price'] + ' readonly>';
                         prodDetail = prodDetail + '<input type="text" value=' + responseObj['prod_detail'] + ' readonly>';
-                        prodDetail = prodDetail + '<label>수량 <input type="number" min="0" name="quantity"></label>';
+                        prodDetail = prodDetail + '<label>수량 <input type="number" value="1" min="0" name="quantity" required></label>';
                         prodDetail = prodDetail + '<button type="submit">장바구니 담기</button>';
                         prodDetail = prodDetail + '</form>';
                         $(targetObj).after(prodDetail);
@@ -171,20 +187,32 @@
             $("nav li > a.cartList").click(e => {
                 let $section = $("div.divContent>section");
                 $.ajax({
-                    url: '/back25/viewCart.jsp'
+                    url: '/back25/viewCart'
                     , success: data => {
-                        let responseObject = JSON.parse(data);
-
-                        if (responseObject.status == 'success') {
+                        if (data != "") {
+                            let responseObject = JSON.parse(data);
                             let cartList = '<form class="cartList">';
-                            responseObject.cart.forEach(item => {
-                                cartList = cartList + '<ul><li>';
-                                cartList = cartList + '<input type="text" value=' + item['prod_no'] + ' readonly>';
-                                cartList = cartList + '<input type="text" value=' + item['prod_name'] + ' readonly>';
-                                cartList = cartList + '<input type="text" value=' + item['prod_price'] + ' readonly>';
-                                cartList = cartList + '<label>수량 <input type="number" min="0" value=' + item['quantity'] + '></label>';
-                            });
-                            cartList = cartList + '</form>';
+                            if (responseObject.status != 'fail') {
+                                responseObject.cart.forEach((element, index) => {
+                                    cartList += '<ul><li>';
+                                    cartList += '<input type="checkbox">';
+
+                                    cartList += '<input type="text" value=' + element['prod_no'] + ' class ="prodNo" readonly>';
+                                    cartList += '<input type="text" value=' + element['prod_name'] + ' readonly>';
+                                    cartList += '<input type="text" value=' + element['prod_price'] + ' readonly>';
+                                    cartList += '<label>금액 <input type="text"value=' + element['prod_price'] + ' readonly></label>';
+                                    cartList += '<label>수량 <input type="number" min="0" value=' + element['quantity'] + ' readonly></label>';
+                                });
+                                cartList += '</li>';
+                                cartList += '<li>';
+                                cartList += '<label><button type="button" class="order_check">전체 선택/해제</button></label>'
+                                cartList += '<label><button type="button" class="order">선택 주문하기</button></label>'
+                                cartList += '</li>';
+                                cartList += '</ul></form>';
+                                $section.html(cartList);
+                            }
+                        } else {
+                            cartList = '<h2>장바구니가 비었습니다" </h2>';
                             $section.html(cartList);
                         }
                     }
@@ -192,6 +220,7 @@
                 $section.html("");
                 return false;
             });
+
             // -- 장바구니 담기 --
             $("section").on('click', '.productDetail button[type=submit]', e => {
                 var targetObj = e.currentTarget.parentElement;
@@ -211,6 +240,36 @@
                 });
                 return false;
             });
+            
+            $("section").on('click','form.cartList button.order_check', () => {
+                let $checked = $('form.cartList ul input[type=checkbox]');
+                if($checked.is(':checked')){
+                    $checked.prop('checked', false);
+                }else{
+                    $checked.prop('checked', true);
+                }
+            });
+            // ----- 주문하기 버튼 Click Start -------
+            $("section").on('click','form.cartList button.order', () => {
+                let $checkedBox = $('form.cartList input[type=checkbox]:checked').siblings('.prodNo');
+                let prodNoList = [];
+                $checkedBox.each(i => {
+                    prodNoList.push({'prod_no': $checkedBox[i].value});
+                });
+                $.ajax({
+                    url: '/back25/addOrder'
+                    , data : prodNoList
+                    , success: data => {
+						if(data.status == 'success'){
+                            alert('주문 성공했습니다.');
+                        }else{
+                            alert('주문 실패했습니다.');
+                        }
+                    }
+                });
+                return false;
+            });
+            // ------- 주문하기 End ---------
         });
     </script>
 </head>
@@ -223,11 +282,11 @@
         <nav>
             <%-- <jsp:include page="/back25/fragment/menu.jsp"></jsp:include>
         --%>
-        	<%@include file="./fragment/menu.jsp" %>
+            <%@include file="./fragment/menu.jsp" %>
         </nav>
         <section>
-            <div class="loginPopUp" style="display:none">
 
+            <div class="loginPopUp" style="display:none">
             </div>
             <p>우물 속에는 달이 밝고 구름이 흐르고 하늘이 펼치고 파아란 바람이 불고 가을이 있고 추억처럼 사나이가 있습니다.</p>
             <div id="div1">

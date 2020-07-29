@@ -27,7 +27,6 @@ public class ProductListServlet extends HttpServlet {
 	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		try {
 			List<Product> list = productService.findAll();
-			System.out.println(list);
 			req.setAttribute("list", list);
 			String servletPath = "/jsp/productList.jsp";
 			

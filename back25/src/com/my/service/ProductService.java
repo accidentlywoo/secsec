@@ -6,10 +6,10 @@ import com.my.dao.ProductDAO;
 import com.my.exception.FindException;
 import com.my.vo.Product;
 
-public class ProductServiceImpl {
+public class ProductService {
 	private ProductDAO productDAO;
 	
-	public ProductServiceImpl() {
+	public ProductService() {
 		productDAO = new ProductDAO();
 	}
 	public Product findByNo(String prod_no) throws FindException {
