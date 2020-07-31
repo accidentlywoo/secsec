@@ -14,7 +14,7 @@ import com.my.sql.MyConnection;
 import com.my.vo.Board;
 
 public class BoardDAO {
-	public static final int CNT_PER_PAGE = 3;
+//	public static final int CNT_PER_PAGE = 3;
 	public void insert(Board board) throws AddException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -45,7 +45,7 @@ public class BoardDAO {
 		}
 	}
 
-	public List<Board> selectAll(int page) throws FindException {
+	public List<Board> selectAll(int startRow,int endRow) throws FindException {
 		Connection con = null;
 		PreparedStatement pstm = null;
 		ResultSet resultSet = null;
@@ -62,8 +62,8 @@ public class BoardDAO {
 			con = MyConnection.getConnection();
 			pstm = con.prepareStatement(pageSql);
 			// page가 1이면 startrow 1 endRow 3
-			int startRow = (page -1)* CNT_PER_PAGE +1;
-			int endRow = startRow +2;
+//			int startRow = (page -1)* CNT_PER_PAGE +1;
+//			int endRow = startRow +2;
 			pstm.setInt(1, startRow);
 			pstm.setInt(2, endRow);
 			resultSet = pstm.executeQuery();
@@ -86,6 +86,26 @@ public class BoardDAO {
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 			throw new FindException();
+		}finally {
+			MyConnection.close(resultSet, pstm, con);
+		}
+	}
+	public int selectCount() throws FindException{
+		Connection con = null;
+		PreparedStatement pstm = null;
+		ResultSet resultSet = null;
+		try {
+			String pageSql = "select count(*) cnt from board";
+			con = MyConnection.getConnection();
+			pstm = con.prepareStatement(pageSql);
+			resultSet = pstm.executeQuery();
+			if(!resultSet.next()) {
+				throw new FindException("게시글이 없습니다.");
+			}
+			return resultSet.getInt("cnt");
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new FindException("error");
 		}finally {
 			MyConnection.close(resultSet, pstm, con);
 		}

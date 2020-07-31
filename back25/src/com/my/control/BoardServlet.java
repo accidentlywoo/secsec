@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.my.exception.AddException;
 import com.my.exception.FindException;
+import com.my.model.PageBean;
 import com.my.service.BoarderService;
 import com.my.vo.Board;
 
@@ -39,12 +40,17 @@ public class BoardServlet extends HttpServlet {
 			if(!currentPage.equals("")) {
 				defaultPage = Integer.parseInt(currentPage);
 			}
-			List<Board> list;
+//			List<Board> list;
 			try {
-				list = boarderService.findAll(defaultPage);
-				request.setAttribute("list", list);
+//				list = boarderService.findAll(defaultPage);
+//				request.setAttribute("list", list);
 				// request에 setAttribute 할 요소들이 너무 많다. 어떻게 해결해야 할까?
 				// -> 페이지에 필요한 정보를 담은 객체를 만들자!
+				PageBean pageBean = boarderService.findAll(defaultPage);
+				String url = request.getServletPath() + request.getPathInfo();
+				pageBean.setUrl(url);
+				System.out.println(pageBean);
+				request.setAttribute("pageBean", pageBean);
 				String servletPath = "/jsp/boardList.jsp";
 				RequestDispatcher dispatcher = request.getRequestDispatcher(servletPath);
 				dispatcher.forward(request, response);

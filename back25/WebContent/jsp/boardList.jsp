@@ -1,11 +1,12 @@
+<%@page import="com.my.model.PageBean"%>
 <%@page import="com.my.vo.Board"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	List<Board> list = (List) request.getAttribute("list");
+	PageBean bean = (PageBean)request.getAttribute("pageBean");
 %>
-<div class=boardInfo"">현제 페이지 : /  총페이지 수 : </div>
+<div class=boardInfo"">현제 페이지 : <span><%=bean.getCurrentPage() %></span>/  총페이지 수 :  <span><%=bean.getEndPage() %></span></div>
 <div class="boardList">
 	<div class="board">
 		<div class="board_no">게시글 번호</div>
@@ -14,7 +15,7 @@
 		<div class="board_dt">날짜</div>
 	</div>
 	<%
-		for (Board item : list) {
+		for (Board item : bean.getList()) {
 	%>
 	<div class="board">
 		<div class="board_no"><%=item.getBoard_no()%></div>
@@ -31,5 +32,21 @@
 	</div>
 	<%
 		}
+	%>
+	<%
+	int totalPage = bean.getTotalPage();
+	if(totalPage > 0){
+		%>
+		<ul>
+		<%
+		for(int j = 0; j < totalPage; j++){
+			%>
+				<li><a><%=j+1 %></a></li>
+			<%
+		}
+		%>
+		</ul>
+		<%
+	}
 	%>
 </div>
