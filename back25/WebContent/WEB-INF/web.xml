@@ -200,4 +200,14 @@
     <servlet-name>AddOrderServlet</servlet-name>
     <url-pattern>/addOrder</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>BoardServlet</display-name>
+    <servlet-name>BoardServlet</servlet-name>
+    <servlet-class>com.my.control.BoardServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BoardServlet</servlet-name>
+    <url-pattern>/board/*</url-pattern>
+  </servlet-mapping>
 </web-app>
