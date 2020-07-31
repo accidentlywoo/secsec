@@ -43,6 +43,8 @@ public class BoardServlet extends HttpServlet {
 			try {
 				list = boarderService.findAll(defaultPage);
 				request.setAttribute("list", list);
+				// request에 setAttribute 할 요소들이 너무 많다. 어떻게 해결해야 할까?
+				// -> 페이지에 필요한 정보를 담은 객체를 만들자!
 				String servletPath = "/jsp/boardList.jsp";
 				RequestDispatcher dispatcher = request.getRequestDispatcher(servletPath);
 				dispatcher.forward(request, response);
