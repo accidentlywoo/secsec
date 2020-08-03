@@ -80,7 +80,7 @@ FROM (SELECT *
 START WITH parent_no = 0
 CONNECT BY PRIOR board_no = parent_no
 ORDER SIBLINGS BY a.board_no DESC
-; -- 내림차순 -> 계츨형쿼리 성공
+; -- 내림차순 -> 계층형쿼리 성공
 -- 계층형 쿼리
 
 -- 페이지 그루핑
