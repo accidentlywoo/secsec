@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import com.my.exception.AddException;
 import com.my.exception.FindException;
@@ -111,8 +112,32 @@ public class BoardDAO {
 		}
 	}
 
-	public Board selectByNo(int board_no) {
-		Board board = new Board();
-		return board;
+	public Optional<Board> selectByNo(int board_no) {
+		String sql = "select * from board where board_no = ?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = MyConnection.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, board_no);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				Board board = new Board(
+						rs.getLong("board_no"),
+						rs.getLong("parent_no"),
+						rs.getString("board_title"),
+						rs.getString("board_writer")
+						,rs.getDate("board_dt"),
+						rs.getString("board_content"));
+				return Optional.of(board);
+			}else {
+				return Optional.empty();
+			}
+		} catch (Exception e) {
+			throw new IllegalStateException(e);
+		}finally {
+			MyConnection.close(rs, pstmt, conn);
+		}
 	}
 }

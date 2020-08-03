@@ -2,6 +2,7 @@ package com.my.control;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -46,8 +47,8 @@ public class BoardServlet extends HttpServlet {
 			//상세보기
 			int boardNo = Integer.parseInt(request.getParameter("board_no"));
 			try {
-				Board board = boarderService.findByNo(boardNo);
-				request.setAttribute("board", board);
+				request.setAttribute("board",
+						boarderService.findByNo(boardNo).orElseGet(Board::new));
 				String servletPath = "/jsp/boardDetail.jsp";
 				RequestDispatcher dispatcher = request.getRequestDispatcher(servletPath);
 				dispatcher.forward(request, response);
