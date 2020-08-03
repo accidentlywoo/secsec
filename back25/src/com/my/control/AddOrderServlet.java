@@ -2,6 +2,7 @@ package com.my.control;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +30,7 @@ public class AddOrderServlet extends HttpServlet {
 	private OrderService orderService;
 	private CustomerService customerService;
 	private ProductService productService;
+
 	@Override
 	public void init() throws ServletException {
 		super.init();
@@ -42,42 +44,42 @@ public class AddOrderServlet extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		System.out.println(req.getParameter("prod_no"));
 		HttpSession session = req.getSession();
-		
-		String id = (String)session.getAttribute("loginInfo");
-		Map<String, Integer> cart = (Map<String, Integer>) session.getAttribute("cart");
-		
+		String id = (String) session.getAttribute("loginInfo");
+		// 장바구니 여러개 중에 하나 주문!
 		String[] prodNoList = req.getParameterValues("prod_no");
-		System.out.println(prodNoList);
+		Map<String, Integer> cart = (Map<String, Integer>) session.getAttribute("cart");
+		System.out.println("cart  : "+cart );
 		String servletPath;
-		if(id == null || "".equals(id)) {
-			servletPath = "/fail.jsp";
-//			throw new AddException("로그인 되지않은 사용자입니다.");
-			req.setAttribute("msg", "로그인 하지 않은 사용자입니다.");
-		}else {
-			servletPath = "/success.jsp";
-			OrderInfo orderInfo = new OrderInfo();
-			Customer customer = null;
-			List<OrderLine>  orderList = new ArrayList<OrderLine>(); 
-			OrderLine orderLine = null;
-			Product product = null;
-			try {
-				for(String key : cart.keySet()) {
-					product = productService.findByNo(key);
+		try {
+			if (id == null || "".equals(id)) {
+				throw new AddException("로그인 되지않은 사용자입니다.");
+			} else {
+				OrderInfo orderInfo = new OrderInfo();
+				List<OrderLine> orderList = new ArrayList<OrderLine>();
+				Product product = null;
+				Customer customer = customerService.findById(id);
+				for (String item : prodNoList) {
+					cart.remove(item);
+					product = productService.findByNo(item);
+					OrderLine orderLine = new OrderLine();
 					orderLine.setOrder_p(product);
-					orderLine.setOrder_quantity(cart.get(key));
+					orderLine.setOrder_quantity(cart.get(item));
 					orderList.add(orderLine);
 				}
-				customer = customerService.findById(id);
-				orderInfo.setLines(orderList);
 				orderInfo.setOrder_c(customer);
-				
-			} catch (FindException e) {
-				e.getMessage();
+				orderInfo.setLines(orderList);
+				orderService.add(orderInfo);
 			}
+			session.setAttribute("cart", cart);
+			servletPath = "/success.jsp";
+			RequestDispatcher dispatcher = req.getRequestDispatcher(servletPath);
+			dispatcher.forward(req, res);
+		} catch (AddException | FindException e) {
+			servletPath = "/fail.jsp";
+			req.setAttribute("errorMsg", "로그인 하지 않은 사용자입니다.");
+			RequestDispatcher dispatcher = req.getRequestDispatcher(servletPath);
+			dispatcher.forward(req, res);
 		}
-		RequestDispatcher dispatcher = req.getRequestDispatcher(servletPath);
-		dispatcher.forward(req, res);
 	}
 }
