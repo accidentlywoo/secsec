@@ -3,4 +3,4 @@
 <%-- 
 out.print("{\"status\":\"fail\"}");
 --%>
-{"status":"fail"}
+{"status":"fail", "msg":"${requestScope.errorMsg}"}

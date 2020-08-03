@@ -34,6 +34,7 @@
                     $boardPage.html(data.trim()); 
                 }
             });
+            return false;
         });
         //----- 글 Click Start -------
         $boardDetail = $('.boardList > div.board');
@@ -84,7 +85,7 @@
         </c:forEach>
     </div>
     <div class="pageGroup">
-     	<c:if test="${bean.startPage  > 1}">
+     	<c:if test="${bean.startPage>1}">
      		<a>&#91;prev&#93;</a>
      	</c:if>
         <c:forEach var="i" begin="${bean.startPage}" end="${bean.endPage}">
@@ -92,7 +93,7 @@
                 <li>&#91;<a>${i}</a>&#93;</li>
             </ul>
         </c:forEach>
-        <c:if test="${bean.endPage  < totalPage}">
+        <c:if test="${bean.endPage<totalPage}">
      		<a>&#91;next&#93;</a>
      	</c:if>
     </div>
