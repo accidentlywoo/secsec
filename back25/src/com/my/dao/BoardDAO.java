@@ -110,4 +110,9 @@ public class BoardDAO {
 			MyConnection.close(resultSet, pstm, con);
 		}
 	}
+
+	public Board selectByNo(int board_no) {
+		Board board = new Board();
+		return board;
+	}
 }

@@ -49,4 +49,7 @@ public class BoarderService {
 		
 		return pageBean;
 	}
+	public Board findByNo(int board_no) throws FindException{
+		return boardDAO.selectByNo(board_no);
+	}
 }
