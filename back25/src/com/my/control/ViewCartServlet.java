@@ -1,9 +1,7 @@
 package com.my.control;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -14,15 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.my.exception.FindException;
-import com.my.service.ProductServiceImpl;
+import com.my.service.ProductService;
 import com.my.vo.Product;
 
 public class ViewCartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private ProductServiceImpl productService;
+	private ProductService productService;
 	
 	public ViewCartServlet() {
-		productService = new ProductServiceImpl();
+		productService = new ProductService();
 	}
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -42,8 +40,8 @@ public class ViewCartServlet extends HttpServlet {
 			}
 			req.setAttribute("cartDetail", cartDetail);
 			servletPath = "/jsp/viewCart.jsp";
-			RequestDispatcher dispatcher = req.getRequestDispatcher(servletPath);
-			dispatcher.forward(req, resp);
 		}
+		RequestDispatcher dispatcher = req.getRequestDispatcher(servletPath);
+		dispatcher.forward(req, resp);
 	}
 }

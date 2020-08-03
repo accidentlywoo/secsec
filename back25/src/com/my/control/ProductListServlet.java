@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.my.exception.FindException;
-import com.my.service.ProductServiceImpl;
+import com.my.service.ProductService;
 import com.my.vo.Product;
 
 /**
@@ -18,10 +18,10 @@ import com.my.vo.Product;
  */
 public class ProductListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private ProductServiceImpl productService;
+	private ProductService productService;
 	
 	public ProductListServlet() {
-		productService = new ProductServiceImpl();
+		productService = new ProductService();
 	}
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
