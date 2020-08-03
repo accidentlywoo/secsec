@@ -1,6 +1,7 @@
 package com.my.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.my.dao.BoardDAO;
 import com.my.exception.AddException;
@@ -49,7 +50,7 @@ public class BoarderService {
 		
 		return pageBean;
 	}
-	public Board findByNo(int board_no) throws FindException{
+	public Optional<Board> findByNo(int board_no) throws FindException{
 		return boardDAO.selectByNo(board_no);
 	}
 }
