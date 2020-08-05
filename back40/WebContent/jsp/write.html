@@ -1,0 +1,27 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(()=>{
+        $.ajax({
+            url : '/back25/board/write'
+            ,method: 'POST'
+            ,success: data => {
+                if(data.status == 'success'){
+                    alert("글쓰기 성공");
+                    location.replace('/back25/list');
+                }else{
+                	alert("글쓰기 실패");
+                    location.reload();
+                }
+            }
+        });
+    });
+</script>
+<div>
+    <form>
+        <label for="board_title">제목</label>
+        <input type="text" name="board_title">
+        <label for="board_content">글 내용</label>
+        <input type="text" name="board_content">
+        <button type="submit">제출</button>
+    </form>
+</div>

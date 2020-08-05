@@ -1,0 +1,98 @@
+div{
+    outline: 1px solid darkmagenta;
+}
+header{
+    width: 100%;
+    height: 130px;
+    background-color: aquamarine;
+    outline: 1px solid darkmagenta;
+}
+header nav{
+    position: relative;
+    outline: 1px solid darkorange;
+    background-color: dimgrey;
+}
+
+header nav ul{
+    width: 100%;
+    right: 0;
+    display: inline;
+}
+header nav ul li{
+    float: right;
+    display: inline;
+}
+header gnb{
+    outline: 1px solid darkorange;
+    background-color: dimgrey;
+}
+header gnb ul li{
+    padding: 4px;
+    display: inline;
+    outline: 1px solid darkmagenta;
+}
+header gnb ul li a{
+    font-size: 1.2em;
+
+}
+section{
+    width: 100%;
+    position: relative;
+    outline: 1px solid darkmagenta;
+}
+section.loginPopUp{
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    z-index: 999;
+    background-color: cornsilk;
+}
+
+section .products .product{
+	width: 33%;
+    display: inline-block;
+}
+section .products .product ul{
+	margin-bottom: 0;
+}
+section .products .product li{
+    width: 150px;
+    display:inline-block;
+    padding-left: 10px;
+    overflow: hidden;
+}
+section .products .product li img{
+    width: 150px;
+    height: 120px;
+}
+section .productDetail{
+    padding: 10px;
+    outline: 2px solid darkcyan;
+}
+section .productDetail input{
+    line-height: 24px;
+    padding-left: 10px;
+    margin: 0 10px;
+}
+
+article{
+    outline: 1px solid blueviolet;
+}
+article.main_half{
+    position: relative;
+    left: 0;
+    vertical-align: top;
+    width: 50%;
+}
+article.main_board{
+    position: absolute;
+    right: 0;
+    left: 50%;
+    top: 180px;
+}
+aside{
+    outline: 1px solid darkmagenta;
+}
+footer{
+    outline: 1px solid darkmagenta;
+}
