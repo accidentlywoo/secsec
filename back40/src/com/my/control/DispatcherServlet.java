@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.lang.reflect.*;
 
 @WebServlet("/") // .html, .jpg, .css등 static 파일 경로도 타게된다.
 //@WebServlet("*.do")
@@ -25,8 +26,8 @@ public class DispatcherServlet extends HttpServlet{
 	protected void service(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("in DispatcherServlet");
 		String servletPath = request.getServletPath();
-
-//		if("/login".equals(servletPath)) {
+		
+		//		if("/login".equals(servletPath)) {
 //			ServletContext sc = this.getServletContext();
 //			String customerEnvFileName = this.getInitParameter("customerEnv");
 //		}else if("/logout".equals(servletPath)) { // ...?
@@ -58,23 +59,25 @@ public class DispatcherServlet extends HttpServlet{
 			
 //			controller.execute(request, resp);
 			// 메서드 호출 방법2
-			java.lang.reflect.Method method = clazz.getMethod("execute", HttpServletRequest.class, HttpServletResponse.class );
+			Method method = clazz.getMethod("execute", HttpServletRequest.class, HttpServletResponse.class );
 			System.out.println(method.getName());
 			controller = (Controller)obj;
+			String forwardServletPath = "";
 			if(controller instanceof LoginController) {
 				ServletContext sc =this.getServletContext();
 				String customerEnvFileName = sc.getInitParameter("customerEnv");
 				String realPath = request.getRealPath(customerEnvFileName);
 				((LoginController) controller).setRealPath(realPath);
+			
+				forwardServletPath = (String) (method.invoke(obj, request, resp));
+				
+			}else if(controller instanceof ProductListController) {
+				forwardServletPath = (String) (method.invoke(obj, request, resp));
 			}
-			
-				String forwardServletPath = (String) (method.invoke(obj, request, resp));
-				if(!"".equals(forwardServletPath)) {
-					RequestDispatcher rd = request.getRequestDispatcher(forwardServletPath);
-					rd.forward(request, resp);
-				}
-//			}
-			
+			if(!"".equals(forwardServletPath)) {
+				RequestDispatcher rd = request.getRequestDispatcher(forwardServletPath);
+				rd.forward(request, resp);
+			}
 //			String forwardServletPath = controller.excute(request, resp);
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | SecurityException | IllegalArgumentException | InvocationTargetException e) {
 			e.printStackTrace();
