@@ -32,22 +32,15 @@ public class LoginController implements Controller{
 		System.out.println("in LoginController execute");
 		String id = request.getParameter("id");
 		String pwd = request.getParameter("pwd");
-		String servletPath = "";
 		try {
 			service.login(id, pwd);
-			
-			servletPath = "/success.jsp";
 			HttpSession session = request.getSession();
 			session.setAttribute("loginInfo", id);
 			service.login(id, pwd);
-
-//			RequestDispatcher dispatcher = request.getRequestDispatcher(servletPath);
-//			dispatcher.forward(request, response);
+			return  "/success.jsp";
 		} catch (FindException e) {
-			servletPath = "/fail.jsp";
+			return "/fail.jsp";
 		}
-		System.out.println("in LoginController servletPath:"+ servletPath);
-		return servletPath;
 	}
 
 	public String getRealPath() {

@@ -15,30 +15,36 @@ import com.my.vo.Customer;
 
 public class IdDupChController implements Controller{
 	private static final long serialVersionUID = 1L;
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	private CustomerService customerService;
+	private String realPath;
+	public IdDupChController() {
 	}
-		
+	
+	public IdDupChController(String realPath) {
+		this.realPath = realPath;
+		this.customerService = new CustomerService(realPath);
+	}
+
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		CustomerService customerService = null;
 //		new CustomerService(realPath);
-		
 		String id = request.getParameter("id");
-		
 		try {
 			Customer customer = customerService.findById(id);
-			String servletPath = "/success.jsp";
 			if(customer != null) {
-				servletPath = "/fail.jsp";
+				return "/fail.jsp";
 			}
-			RequestDispatcher dispatcher = request.getRequestDispatcher(servletPath);
-			dispatcher.forward(request, response);
+			return "/success.jsp";
 		} catch (FindException e) {
-			e.printStackTrace();
+			return "/fail.jsp";
 		}
-		return null;
+	}
+
+	public String getRealPath() {
+		return realPath;
+	}
+	public void setRealPath(String realPath) {
+		this.realPath = realPath;
 	}
 }

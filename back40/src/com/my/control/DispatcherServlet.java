@@ -24,7 +24,6 @@ public class DispatcherServlet extends HttpServlet{
 	
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("in DispatcherServlet");
 		String servletPath = request.getServletPath();
 		
 		//		if("/login".equals(servletPath)) {
@@ -45,7 +44,7 @@ public class DispatcherServlet extends HttpServlet{
 		String controllerClassName = env.getProperty(servletPath);
 		//프로퍼티값(클래스 이름) 클래스 찾아 JVM에 로드
 		try {
-			Class clazz = Class.forName(controllerClassName);
+			Class<?> clazz = Class.forName(controllerClassName);
 			// 객체 생성
 			Object obj = clazz.newInstance(); // 성공 : public 매개변수없는 생성자존재
 			// 메서드 호출 방법1
@@ -60,20 +59,39 @@ public class DispatcherServlet extends HttpServlet{
 //			controller.execute(request, resp);
 			// 메서드 호출 방법2
 			Method method = clazz.getMethod("execute", HttpServletRequest.class, HttpServletResponse.class );
-			System.out.println(method.getName());
 			controller = (Controller)obj;
-			String forwardServletPath = "";
-			if(controller instanceof LoginController) {
-				ServletContext sc =this.getServletContext();
-				String customerEnvFileName = sc.getInitParameter("customerEnv");
-				String realPath = request.getRealPath(customerEnvFileName);
-				((LoginController) controller).setRealPath(realPath);
 			
-				forwardServletPath = (String) (method.invoke(obj, request, resp));
+			System.out.println("reflecting class name : "+controller.getClass());
+			ServletContext sc =this.getServletContext();
+			String customerEnvFileName = sc.getInitParameter("customerEnv");
+			String realPath = request.getRealPath(customerEnvFileName);
+			if(compareFQCN("com.my.control.LoginController")) {
+				((LoginController) controller).setRealPath(realPath);
+			}else if(compareFQCN("com.my.control.LogoutController")) {
 				
-			}else if(controller instanceof ProductListController) {
-				forwardServletPath = (String) (method.invoke(obj, request, resp));
+			}else if(compareFQCN("com.my.control.SignupController")) {
+				
+			}else if(compareFQCN("com.my.control.IdDupChController")) {
+				
+			}else if(compareFQCN("com.my.control.ProductListController")) {
+				
+			}else if(compareFQCN("com.my.control.ProductDetailController")) {
+				
+			}else if(compareFQCN("com.my.control.PutCartController")) {
+				
+			}else if(compareFQCN("com.my.control.ViewCartController")) {
+				
+			}else if(compareFQCN("com.my.control.AddOrderController")) {
+				
+			}else if(compareFQCN("com.my.control.BoardController")) {
+				
+			}else if(compareFQCN("com.my.control.DownloadController")) {
+				
+			}else if(compareFQCN("com.my.control.UploadController")) {
+				
 			}
+			String forwardServletPath = (String) (method.invoke(obj, request, resp));
+			
 			if(!"".equals(forwardServletPath)) {
 				RequestDispatcher rd = request.getRequestDispatcher(forwardServletPath);
 				rd.forward(request, resp);
@@ -82,9 +100,8 @@ public class DispatcherServlet extends HttpServlet{
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | SecurityException | IllegalArgumentException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
-//		if (!"".equals(forwardServletPath)) {
-//			RequestDispatcher reqdp = request.getRequestDispatcher(servletPath);
-//			reqdp.forward(request, resp);
-//		}
+	}
+	private boolean compareFQCN(String fqcn) {
+		return controller.getClass().equals(fqcn);
 	}
 }

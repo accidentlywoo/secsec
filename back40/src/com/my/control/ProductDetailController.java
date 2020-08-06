@@ -25,12 +25,9 @@ public class ProductDetailController implements Controller {
 		try {
 			Product product = productService.findByNo(prod_no);
 			request.setAttribute("p", product);
-			String servletPath = "/productDetail.jsp";
-			RequestDispatcher dispatcher = request.getRequestDispatcher(servletPath);
-			dispatcher.forward(request, response);
+			return "/productDetail.jsp";
 		} catch (FindException e) {
-			e.printStackTrace();
+			return "/fail.jsp";
 		}
-		return null;
 	}
 }

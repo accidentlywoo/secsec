@@ -33,15 +33,13 @@ public class ProductListController implements Controller {
 		if(productService == null) {
 			productService = new ProductService();
 		}
-		String servletPath = "";
 		try {
 			List<Product> list = productService.findAll();
 			request.setAttribute("list", list);
-			servletPath = "/jsp/productList.jsp";
+			return "/jsp/productList.jsp";
 		} catch (FindException e) {
-			servletPath = "/fail.jsp";
+			return "/fail.jsp";
 		}
-		return servletPath;
 	}
 
 	public String getRealPath() {

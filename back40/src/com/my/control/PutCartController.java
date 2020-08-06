@@ -39,11 +39,6 @@ public class PutCartController implements Controller{
 		totalQuantity = Integer.parseInt(request.getParameter("quantity"));
 		cart.put(request.getParameter("prod_no"), totalQuantity);
 		session.setAttribute("cart", cart);
-
-		String servletPath = "/success.jsp";
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher(servletPath);
-		dispatcher.forward(request, response);
-		return null;
+		return "/success.jsp";
 	}
 }
