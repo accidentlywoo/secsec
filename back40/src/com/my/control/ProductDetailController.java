@@ -12,26 +12,25 @@ import com.my.exception.FindException;
 import com.my.service.ProductService;
 import com.my.vo.Product;
 
-/**
- * Servlet implementation class ProductDetailServlet
- */
-public class ProductDetailServlet extends HttpServlet {
+public class ProductDetailController implements Controller {
 	private static final long serialVersionUID = 1L;
 	private ProductService productService;
-	public ProductDetailServlet() {
+	public ProductDetailController() {
 		productService = new ProductService();
 	}
 	@Override
-	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String prod_no = req.getParameter("prod_no");
+	public String execute(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String prod_no = request.getParameter("prod_no");
 		try {
 			Product product = productService.findByNo(prod_no);
-			req.setAttribute("p", product);
+			request.setAttribute("p", product);
 			String servletPath = "/productDetail.jsp";
-			RequestDispatcher dispatcher = req.getRequestDispatcher(servletPath);
-			dispatcher.forward(req, resp);
+			RequestDispatcher dispatcher = request.getRequestDispatcher(servletPath);
+			dispatcher.forward(request, response);
 		} catch (FindException e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
 }

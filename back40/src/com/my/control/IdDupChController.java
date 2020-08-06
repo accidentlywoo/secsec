@@ -13,16 +13,18 @@ import com.my.exception.FindException;
 import com.my.service.CustomerService;
 import com.my.vo.Customer;
 
-public class IdDupChServlet extends HttpServlet {
+public class IdDupChController implements Controller{
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ServletContext servletContext = this.getServletContext();
-		String realPath = servletContext.getRealPath("customers.properties");
-		CustomerService customerService = new CustomerService(realPath);
+		
+	@Override
+	public String execute(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		CustomerService customerService = null;
+//		new CustomerService(realPath);
 		
 		String id = request.getParameter("id");
 		
@@ -37,5 +39,6 @@ public class IdDupChServlet extends HttpServlet {
 		} catch (FindException e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
 }

@@ -15,16 +15,17 @@ import com.my.exception.FindException;
 import com.my.service.ProductService;
 import com.my.vo.Product;
 
-public class ViewCartServlet extends HttpServlet {
+public class ViewCartController implements Controller{
 	private static final long serialVersionUID = 1L;
 	private ProductService productService;
 	
-	public ViewCartServlet() {
+	public ViewCartController() {
 		productService = new ProductService();
 	}
 	@Override
-	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		HttpSession session = req.getSession();
+	public String execute(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		Map<String, Integer> cart = (Map<String, Integer>)session.getAttribute("cart");
 		String servletPath = null;
 		if(cart == null) {
@@ -38,10 +39,9 @@ public class ViewCartServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
-			req.setAttribute("cartDetail", cartDetail);
+			request.setAttribute("cartDetail", cartDetail);
 			servletPath = "/jsp/viewCart.jsp";
 		}
-		RequestDispatcher dispatcher = req.getRequestDispatcher(servletPath);
-		dispatcher.forward(req, resp);
+		return null;
 	}
 }

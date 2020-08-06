@@ -24,7 +24,7 @@ import com.my.vo.OrderInfo;
 import com.my.vo.OrderLine;
 import com.my.vo.Product;
 
-public class AddOrderServlet extends HttpServlet {
+public class AddOrderController implements Controller{
 	private static final long serialVersionUID = 1L;
 	private String realPath;
 	private OrderService orderService;
@@ -32,22 +32,12 @@ public class AddOrderServlet extends HttpServlet {
 	private ProductService productService;
 
 	@Override
-	public void init() throws ServletException {
-		super.init();
-		ServletContext servletContext = this.getServletContext();
-		String customerEnvFileName = servletContext.getInitParameter("customerEnv");
-		realPath = servletContext.getRealPath(customerEnvFileName);
-		orderService = new OrderService();
-		customerService = new CustomerService(realPath);
-		productService = new ProductService();
-	}
-
-	@Override
-	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		HttpSession session = req.getSession();
+	public String execute(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("loginInfo");
 		// 장바구니 여러개 중에 하나 주문!
-		String[] prodNoList = req.getParameterValues("prod_no");
+		String[] prodNoList = request.getParameterValues("prod_no");
 		Map<String, Integer> cart = (Map<String, Integer>) session.getAttribute("cart");
 		System.out.println("cart  : "+cart );
 		String servletPath;
@@ -73,13 +63,14 @@ public class AddOrderServlet extends HttpServlet {
 			}
 			session.setAttribute("cart", cart);
 			servletPath = "/success.jsp";
-			RequestDispatcher dispatcher = req.getRequestDispatcher(servletPath);
-			dispatcher.forward(req, res);
+			RequestDispatcher dispatcher = request.getRequestDispatcher(servletPath);
+			dispatcher.forward(request, response);
 		} catch (AddException | FindException e) {
 			servletPath = "/fail.jsp";
-			req.setAttribute("errorMsg", "로그인 하지 않은 사용자입니다.");
-			RequestDispatcher dispatcher = req.getRequestDispatcher(servletPath);
-			dispatcher.forward(req, res);
+			request.setAttribute("errorMsg", "로그인 하지 않은 사용자입니다.");
+			RequestDispatcher dispatcher = request.getRequestDispatcher(servletPath);
+			dispatcher.forward(request, response);
 		}
+		return null;
 	}
 }

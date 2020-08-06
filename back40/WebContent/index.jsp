@@ -7,10 +7,10 @@
     <title>웰컴파일</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=3.0">
-    <link rel="stylesheet" href="/back25/static/css/reset.css">
-    <link rel="stylesheet" href="/back25/static/css/main.css">
+    <link rel="stylesheet" href="/back40/static/css/reset.css">
+    <link rel="stylesheet" href="/back40/static/css/main.css">
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> -->
-    <link rel="stylesheet" href="/back25/static/css/bootstrap-4.5.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/back40/static/css/bootstrap-4.5.0-dist/css/bootstrap.min.css">
     <style>
         body>div>section>div>.product:hover {
             border: 1px solid teal;
@@ -33,7 +33,7 @@
             $loginMenu.click(() => {
                 let oldSection = $section.html();
                 $.ajax({
-                    url: '/back25/login.html'
+                    url: '/back40/login.html'
                     , success: data => {
                         oldSection += data;
                         $section.html(oldSection);
@@ -70,7 +70,7 @@
                     }
 
                     $.ajax({
-                        url: '/back25/login'
+                        url: '/back40/login'
                         , method: 'POST'
                         , data: { id: idValue, pwd: pwdValue }
                         , success: function (data) {
@@ -99,7 +99,7 @@
             let $logoutMenu = $('nav > ul li .logout');
             $logoutMenu.click(() => {
                 $.ajax({
-                    url: '/back25/logout'
+                    url: '/back40/logout'
                     , success: data => {
                         if (data.status == 'success') {
                             alert('로그아웃 되었습니다.');
@@ -113,7 +113,7 @@
             //회원 가입
             let $signupMenu = $('nav>ul>li>a.signup');
             $signupMenu.click(() => {
-                location.href = '/back25/jq/signup.html';
+                location.href = '/back40/jq/signup.html';
             });
             //----------상품목록 메뉴 START----------
             //dom트리에서 nav>ul>li>a요소의 class속성이 productList인 객체 찾기
@@ -122,7 +122,7 @@
             $productListMenu.click(() => {
                 let oldSection = $section.html();
                 $.ajax({
-                    url: '/back25/productList'
+                    url: '/back40/productList'
                     , success: data => {
                         //응답내용을 자바스크립트객체로 변환:배열형태로 응답
                         let responseArrObj = JSON.parse(data);
@@ -135,8 +135,8 @@
                             sectionData += '<div class="product">';
                             sectionData += "<ul>";
                             sectionData += '<li class="prod_no" style="  visibility: hidden;">'; sectionData += prod_no; sectionData += '</li>';
-                            //cartList +=  '<img src="/back25/images/'+element['prod_no']+'.jpg>';
-                            sectionData += '<li><img src="/back25/images/' + prod_no + '.jpg"></li>';
+                            //cartList +=  '<img src="/back40/images/'+element['prod_no']+'.jpg>';
+                            sectionData += '<li><img src="/back40/images/' + prod_no + '.jpg"></li>';
                             sectionData += "<li>"; sectionData += prod_name; sectionData += "</li>";
                             sectionData += "<li>"; sectionData += prod_price; sectionData += "</li>";
                             sectionData += "</ul>";
@@ -165,7 +165,7 @@
                     return false;
                 }
                 $.ajax({
-                    url: '/back25/productDetail'
+                    url: '/back40/productDetail'
                     , data: { 'prod_no': prodId }
                     , success: data => {
                         let responseObj = JSON.parse(data);
@@ -187,7 +187,7 @@
             $("nav li > a.cartList").click(e => {
                 let $section = $("div.divContent>section");
                 $.ajax({
-                    url: '/back25/viewCart'
+                    url: '/back40/viewCart'
                     , success: data => {
                         if (data != "") {
                             let cartList = '<form class="cartList">';
@@ -229,7 +229,7 @@
                 var targetObj = e.currentTarget.parentElement;
                 var formDataSerialize = $(targetObj).serialize();
                 $.ajax({
-                    url: '/back25/putCart'
+                    url: '/back40/putCart'
                     , method: 'POST'
                     , data: formDataSerialize
                     , success: data => {
@@ -256,7 +256,7 @@
             $("section").on('click', 'form.cartList button.order', () => {
                 let $checkedBox = $('form.cartList').serialize();
                 $.ajax({
-                    url: '/back25/addOrder'
+                    url: '/back40/addOrder'
                     , data: $checkedBox
                     , success: data => {
                         if (data.status == 'success') {
@@ -272,7 +272,7 @@
             // ------- 주문목록 ---------
             $("section nav li > a.cartList").click(() => {
                 $.ajax({
-                    url: '/back25/orderList'
+                    url: '/back40/orderList'
                     , success: data => {
 
                     }
@@ -283,7 +283,7 @@
             $("nav li > a.boardList").click(e => {
                 let $section = $("div.divContent>section");
                 $.ajax({
-                    url:'/back25/board/list'
+                    url:'/back40/board/list'
                     ,success: data => {
                         $section.html(data.trim());
                     }
@@ -302,7 +302,7 @@
             <a class="home">여니</a>
         </h1>
         <nav>
-            <%-- <jsp:include page="/back25/fragment/menu.jsp"></jsp:include>
+            <%-- <jsp:include page="/back40/fragment/menu.jsp"></jsp:include>
         --%>
             <%@include file="./fragment/menu.jsp" %>
         </nav>

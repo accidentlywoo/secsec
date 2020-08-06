@@ -17,7 +17,7 @@ import com.my.model.PageBean;
 import com.my.service.BoarderService;
 import com.my.vo.Board;
 
-public class BoardServlet extends HttpServlet {
+public class BoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private BoarderService boarderService = new BoarderService();
 	
