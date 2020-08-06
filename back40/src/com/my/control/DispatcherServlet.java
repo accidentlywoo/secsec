@@ -61,12 +61,14 @@ public class DispatcherServlet extends HttpServlet{
 			Method method = clazz.getMethod("execute", HttpServletRequest.class, HttpServletResponse.class );
 			controller = (Controller)obj;
 			
-			System.out.println("reflecting class name : "+controller.getClass());
+			System.out.println("reflecting class name : "+controller.getClass().getName());
 			ServletContext sc =this.getServletContext();
 			String customerEnvFileName = sc.getInitParameter("customerEnv");
 			String realPath = request.getRealPath(customerEnvFileName);
+			System.out.println("compareFQCN " +  compareFQCN("com.my.control.LoginController"));
 			if(compareFQCN("com.my.control.LoginController")) {
 				((LoginController) controller).setRealPath(realPath);
+				System.out.println("realPath" + realPath);
 			}else if(compareFQCN("com.my.control.LogoutController")) {
 				
 			}else if(compareFQCN("com.my.control.SignupController")) {
@@ -102,6 +104,6 @@ public class DispatcherServlet extends HttpServlet{
 		}
 	}
 	private boolean compareFQCN(String fqcn) {
-		return controller.getClass().equals(fqcn);
+		return controller.getClass().getName().equals(fqcn);
 	}
 }
