@@ -190,25 +190,28 @@
                     url: '/back25/viewCart'
                     , success: data => {
                         if (data != "") {
-                            let responseObject = JSON.parse(data);
                             let cartList = '<form class="cartList">';
-                            if (responseObject.status != 'fail') {
-                                responseObject.cart.forEach((element, index) => {
-                                    cartList += '<ul><li>';
+                            cartList += '<ul>';
+                            if (data.status != 'fail') {
+                                data.cart.forEach((element, index) => {
+                                    cartList += '<li>';
                                     cartList += '<input type="checkbox">';
 
-                                    cartList += '<input type="text" value=' + element['prod_no'] + ' class ="prodNo" readonly>';
+                                    cartList += '<input type="text" value=' + element['prod_no'] + ' name="prod_no" class ="prodNo" readonly>';
                                     cartList += '<input type="text" value=' + element['prod_name'] + ' readonly>';
                                     cartList += '<input type="text" value=' + element['prod_price'] + ' readonly>';
                                     cartList += '<label>금액 <input type="text"value=' + element['prod_price'] + ' readonly></label>';
-                                    cartList += '<label>수량 <input type="number" min="0" value=' + element['quantity'] + ' readonly></label>';
+                                    cartList += '<label>수량 <input type="number" min="0" value=' + element['quantity'] + ' name="quantity" readonly></label>';
+                                    cartList += '</li>';
                                 });
-                                cartList += '</li>';
                                 cartList += '<li>';
                                 cartList += '<label><button type="button" class="order_check">전체 선택/해제</button></label>'
                                 cartList += '<label><button type="button" class="order">선택 주문하기</button></label>'
                                 cartList += '</li>';
                                 cartList += '</ul></form>';
+                                $section.html(cartList);
+                            } else {
+                                cartList = '<h2>장바구니가 비었습니다" </h2>';
                                 $section.html(cartList);
                             }
                         } else {
@@ -240,36 +243,55 @@
                 });
                 return false;
             });
-            
-            $("section").on('click','form.cartList button.order_check', () => {
+
+            $("section").on('click', 'form.cartList button.order_check', () => {
                 let $checked = $('form.cartList ul input[type=checkbox]');
-                if($checked.is(':checked')){
+                if ($checked.is(':checked')) {
                     $checked.prop('checked', false);
-                }else{
+                } else {
                     $checked.prop('checked', true);
                 }
             });
             // ----- 주문하기 버튼 Click Start -------
-            $("section").on('click','form.cartList button.order', () => {
-                let $checkedBox = $('form.cartList input[type=checkbox]:checked').siblings('.prodNo');
-                let prodNoList = [];
-                $checkedBox.each(i => {
-                    prodNoList.push({'prod_no': $checkedBox[i].value});
-                });
+            $("section").on('click', 'form.cartList button.order', () => {
+                let $checkedBox = $('form.cartList').serialize();
                 $.ajax({
                     url: '/back25/addOrder'
-                    , data : prodNoList
+                    , data: $checkedBox
                     , success: data => {
-						if(data.status == 'success'){
+                        if (data.status == 'success') {
                             alert('주문 성공했습니다.');
-                        }else{
-                            alert('주문 실패했습니다.');
+                        } else {
+                            alert("주문 실패 : " + data.msg);
                         }
                     }
                 });
                 return false;
             });
             // ------- 주문하기 End ---------
+            // ------- 주문목록 ---------
+            $("section nav li > a.cartList").click(() => {
+                $.ajax({
+                    url: '/back25/orderList'
+                    , success: data => {
+
+                    }
+                });
+            });
+            // ------- 주문목록 End ---------
+            // --------- 게시판 ------------
+            $("nav li > a.boardList").click(e => {
+                let $section = $("div.divContent>section");
+                $.ajax({
+                    url:'/back25/board/list'
+                    ,success: data => {
+                        $section.html(data.trim());
+                    }
+                });
+                $section.html("");
+                return false;
+            });
+            // ------- 게시판 End ---------
         });
     </script>
 </head>
@@ -364,7 +386,7 @@
                 <br>
                 <a href="#div1">텍스트</a>
                 <a href="#div2">목록</a>
-                <iframe src="../sub.html" width="500px"></iframe>
+                <%-- <iframe src="../sub.html" width="500px"></iframe> --%>
             </div>
             <input type="number" min="0">
         </section>

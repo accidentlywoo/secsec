@@ -13,6 +13,18 @@ public class Board {
 	// sudo column 필드 추가하기
 	private int level;
 	public Board() {}
+	
+	public Board(long board_no, long parent_no, String board_title, String board_writer, Date board_dt,
+			String board_content) {
+		super();
+		this.board_no = board_no;
+		this.parent_no = parent_no;
+		this.board_title = board_title;
+		this.board_writer = board_writer;
+		this.board_dt = board_dt;
+		this.board_content = board_content;
+	}
+
 	public Board(long board_no, long parent_no, String board_title, String board_writer, Date board_dt,
 			String board_content, int level) {
 		this.board_no = board_no;
