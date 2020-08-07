@@ -5,3 +5,13 @@ front/.settings/.jsdtscope
 front/.settings/
 Servers/
 front/WebContent/META-INF/MANIFEST.MF
+.idea/
+back25/.project
+back25/.settings/
+back25/.classpath
+back25/.gitignore
+back25/WebContent/META-INF/MANIFEST.MF
+back40/.project
+back40/.settings/.jsdtscope
+back40/.settings/
+back40/.classpath

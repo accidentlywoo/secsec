@@ -54,4 +54,10 @@ public class OrderInfo {
 	public void setLines(List<OrderLine> lines) {
 		this.lines = lines;
 	}
+
+	@Override
+	public String toString() {
+		return "OrderInfo [order_no=" + order_no + ", order_c=" + order_c + ", order_dt=" + order_dt + ", lines="
+				+ lines + "]";
+	}
 }

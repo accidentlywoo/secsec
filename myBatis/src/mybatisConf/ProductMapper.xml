@@ -3,7 +3,28 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ProductMapper">
-  <select id="selectByNo" resultType="com.my.vo.Product">
-    	SELECT * FROM PRODUCT WHERE prod_no = #{prod_no}
+  <select id="selectByNo"  parameterType="map" resultType="com.my.vo.Product">
+    	 SELECT * 
+      	  FROM PRODUCT 
+    	WHERE prod_no = #{prod_no}
   </select>
+  <!-- result type -->
+  <select id="selectByNoMap"  parameterType="map" resultType="map">
+    	 SELECT 
+	    			  PROD_NO no
+	    		    , PROD_NAME name
+    	  FROM PRODUCT 
+    	WHERE prod_no = #{prod_no}
+  </select>
+  <select id="selectAll"  parameterType="map" resultType="com.my.vo.Product">
+    	SELECT *
+    	FROM PRODUCT 
+  </select>
+  <insert id="insert" parameterType="com.my.vo.Product">
+  		INSERT 
+  		INTO PRODUCT
+ 					(prod_no, prod_name, prod_price)
+  		 VALUES 
+  		 			(#{prod_no},#{prod_name},#{prod_price})
+  </insert>
 </mapper>

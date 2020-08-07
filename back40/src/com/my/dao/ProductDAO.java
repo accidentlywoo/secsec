@@ -26,7 +26,7 @@ public class ProductDAO {
 			e.printStackTrace();
 		}
 		
-		String selectBtProdNo = 
+		String selectByProdNo = 
 				"SELECT \r\n" + 
 				"    prod_no,\r\n" + 
 				"    prod_name,\r\n" + 
@@ -35,7 +35,7 @@ public class ProductDAO {
 				"WHERE prod_no = ?";
 		
 		try {
-			pstmt = connection.prepareStatement(selectBtProdNo);
+			pstmt = connection.prepareStatement(selectByProdNo);
 			pstmt.setString(1, no);
 			result = pstmt.executeQuery();
 			if(result.next()) {
