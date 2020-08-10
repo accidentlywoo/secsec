@@ -32,5 +32,8 @@ public class OrderLine {
 	public void setOrder_quantity(int order_quantity) {
 		this.order_quantity = order_quantity;
 	}
-	
+	@Override
+	public String toString() {
+		return "OrderLine [order_no=" + order_no + ", order_p=" + order_p + ", order_quantity=" + order_quantity + "]";
+	}
 }

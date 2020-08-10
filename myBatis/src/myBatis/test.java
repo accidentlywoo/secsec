@@ -76,7 +76,15 @@ public class test {
 
 		List<OrderInfo> list3 = session.selectList("OrderMapper.selectById", "id5");
 		for(OrderInfo item : list3) {
-			System.out.println("Order selectById : " + item);
+			for(OrderLine item2 : item.getLines()) {
+				System.out.println("orderLine : "+ item2);
+				Product product2 = item2.getOrder_p();
+				System.out.println("복잡한 select문 : " +
+						product2.getProd_no() + ", "+
+						product2.getProd_name() + ", " +
+						product2.getProd_price() + ", " +
+						item2.getOrder_quantity());
+			}
 //			System.out.println("Order selectById order_no  : " +item.getOrder_no());
 		}
 		session.close();
